@@ -1,21 +1,35 @@
-# xiaomi
+## 组件组成
+    1. App.vue
+      Header.vue
+        LoginHeader.vue
+      router-view
+      Footer
+    2. Index.vue
+      Nav
+      CateMenu
+      AdvSwiper
+      HotProducts
+      FlashShop
+      Recommend
+        RecommendCard
+    3. Detail.vue
+    4. Search.vue
+       ClassifySelector.vue
+       SortSelector.vue
+       ProductCard.vue
+       Pages.vue
+    5. Cart.vue
+      CartItem.vue
+      LoginHeader.vue
+    6. Register.vue
+    7. Login.vue
+    8. Personal.vue
+        SelfInfo.vue
+        Order.vue
+          OrderCard.vue
+    9. AddSuccess.vue
+    10. Settlement.vue
 
-> xiaomishangcheng
-
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 接口
+    1. 获取购物车不可用 
+    2. 登陆/注册功能确定

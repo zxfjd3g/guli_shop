@@ -106,7 +106,6 @@
           &:hover
             img
               opacity: 1
-
     .time
       background-color: #f1eded
       .name

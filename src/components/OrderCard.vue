@@ -1,13 +1,13 @@
 <template>
   <div class="ddxq">
-    <div class="ddspt fl"><img :src="order.imgSrc" alt=""></div>
-    <div class="ddbh fl">订单号:{{order.number}}</div>
+    <div class="ddspt fl"><img src="/static/image/order/gwc_xiaomi6.jpg" alt=""></div>
+    <div class="ddbh fl">订单号:1705205643098724</div>
     <div class="ztxx fr">
       <ul>
-        <li>{{order.state}}</li>
-        <li>￥{{order.totalPrice}}</li>
-        <li style="line-height:30px">{{order.createTime}}</li>
-        <li><a href="javascript:;">订单详情></a></li>
+        <li>已发货</li>
+        <li>￥2499.00</li>
+        <li>2017/05/20 13:30</li>
+        <li><a href="">订单详情></a></li>
         <div class="clear"></div>
       </ul>
     </div>
@@ -15,10 +15,9 @@
   </div>
 </template>
 <script>
+
   export default {
-    props: {
-      order: Object
-    }
+
   }
 </script>
 <style lang="stylus" scoped>
