@@ -75,7 +75,7 @@
   </div>
 </template>
 <script>
-  import ShopGood from "../../components/ShopGood.vue";
+  import CartItem from "../../components/CartItem.vue";
 
   export default {}
 </script>
