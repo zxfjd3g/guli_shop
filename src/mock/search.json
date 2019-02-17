@@ -1,0 +1,105 @@
+{
+  "classifys": [
+    {
+      "id": 1,
+      "name": "保护套/保护壳"
+    },
+    {
+      "id": 2,
+      "name": "贴膜"
+    },
+    {
+      "id": 3,
+      "name": "手机"
+    }
+  ],
+  "products": [{
+    "id": 123,
+    "name": "小米MIX",
+    "imgSrc": "/static/image/pinpai1.png",
+    "discounts": "5月9日-21日享花呗12期分期免息",
+    "price": 3499,
+    "classify": 3
+  },
+    {
+      "id": 123,
+      "name": "小米5s",
+      "imgSrc": "/static/image/pinpai2.png",
+      "discounts": "5月9日-10日，下单立减200元",
+      "price": 1999,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米手机5 64GB",
+      "imgSrc": "/static/image/pinpai3.png",
+      "discounts": "5月9日-10日，下单立减100元",
+      "price": 1799,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米MIX",
+      "imgSrc": "/static/image/pinpai1.png",
+      "discounts": "5月9日-21日享花呗12期分期免息",
+      "price": 3499,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米MIX",
+      "imgSrc": "/static/image/pinpai1.png",
+      "discounts": "5月9日-21日享花呗12期分期免息",
+      "price": 3499,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米MIX",
+      "imgSrc": "/static/image/pinpai1.png",
+      "discounts": "5月9日-21日享花呗12期分期免息",
+      "price": 3499,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米5s",
+      "imgSrc": "/static/image/pinpai2.png",
+      "discounts": "5月9日-10日，下单立减200元",
+      "price": 1999,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米手机5 64GB",
+      "imgSrc": "/static/image/pinpai3.png",
+      "discounts": "5月9日-10日，下单立减100元",
+      "price": 1799,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米MIX",
+      "imgSrc": "/static/image/pinpai1.png",
+      "discounts": "5月9日-21日享花呗12期分期免息",
+      "price": 3499,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米MIX2",
+      "imgSrc": "/static/image/pinpai1.png",
+      "discounts": "5月9日-21日享花呗12期分期免息",
+      "price": 3499,
+      "classify": 3
+    },
+    {
+      "id": 123,
+      "name": "小米MIX3",
+      "imgSrc": "/static/image/pinpai1.png",
+      "discounts": "5月9日-21日享花呗12期分期免息",
+      "price": 3499,
+      "classify": 3
+    }
+  ]
+}

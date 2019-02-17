@@ -1,0 +1,16 @@
+[
+  {
+    "imgSrc": "/static/image/gwc_xiaomi6.jpg",
+    "number": 1705205643098724,
+    "state": "已发货",
+    "totalPrice": 2499,
+    "createTime": "2017/05/20 13:30"
+  },
+  {
+    "imgSrc": "/static/image/liebiao_hongmin4_dd.jpg",
+    "number": 1705205643098666,
+    "state": "未发货",
+    "totalPrice": 2199,
+    "createTime": "2018/07/20 15:30"
+  }
+]

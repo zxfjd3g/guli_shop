@@ -1,0 +1,29 @@
+{
+    "id":123,
+    "name":"小米MIX",
+    "imgSrc": "/static/image/liebiao_xiaomi6.jpg",
+    "versions":[{
+        "id":110,
+        "name":"全网通版 6GB+64GB",
+        "colors":[{"id":1112,"name":"亮黑色","color":"#000"},{"id":1113,"name":"大红色","color":"#f00"}],
+        "price":2499
+    },{
+        "id":111,
+        "name":"全网通版 6GB+128GB",
+        "colors":[{"id":1113,"name":"大红色","color":"#f00"},{"id":1114,"name":"蓝色","color":"#00f"}],
+        "price":2899
+    },{
+        "id":111,
+        "name":"全网通版 6GB+128GB",
+        "colors":[{"id":1113,"name":"大红色","color":"#f00"},{"id":1114,"name":"蓝色","color":"#00f"}],
+        "price":2899
+    },{
+        "id":111,
+        "name":"全网通版 6GB+128GB",
+        "colors":[{"id":1113,"name":"大红色","color":"#f00"},{"id":1114,"name":"蓝色","color":"#00f"}],
+        "price":2899
+    }],
+    "discounts": "5月9日-21日享花呗12期分期免息",
+    "price": 2499,
+    "info":"变焦双摄，4 轴防抖 / 骁龙835 旗舰处理器，6GB 大内存，最大可选128GB 闪存 / 5.15' 护眼屏 / 四曲面玻璃/陶瓷机身"
+}
