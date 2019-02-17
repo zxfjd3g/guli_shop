@@ -18,61 +18,12 @@
         <div class="search">
           <input class="text" type="text">
           <div class="search_hot">
-            <a href="javascript:;">小米8</a>
-            <a href="javascript:;">小米MIX 2S</a>
+            <a href="javascript:;" v-for="item in hotSearch" :key="item.id">{{item.name}}</a>
           </div>
           <ul class="keyword_list">
-            <li>
+            <li v-for="item in hotSearch" :key="item.id">
               <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
-                <span class="result">约有6件</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;">
-                <span>小米6</span>
+                <span>{{item.name}}</span>
                 <span class="result">约有6件</span>
               </a>
             </li>
@@ -84,8 +35,14 @@
   </nav>
 </template>
 <script>
+  import {mapState} from 'vuex';
   export default {
-
+    computed:{
+      ...mapState(["hotSearch"])
+    },
+    mounted(){
+      this.$store.dispatch('getHotSearch');
+    }
   };
 </script>
 <style lang="stylus" scoped>
