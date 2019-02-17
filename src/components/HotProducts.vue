@@ -20,26 +20,24 @@
         <img src="/static/image/sub_banner/hjh_06.gif" alt="">
       </a>
     </div>
-    <div class="bigImg">
+    <div class="bigImg" v-for="product in hotProducts" :key="product.id">
       <a href="javascript:;">
-        <img src="/static/image/sub_banner/hongmi4x.png" alt="">
-      </a>
-    </div>
-    <div class="bigImg">
-      <a href="javascript:;">
-        <img src="/static/image/sub_banner/xiaomi5.jpg" alt="">
-      </a>
-    </div>
-    <div class="bigImg">
-      <a href="javascript:;">
-        <img src="/static/image/sub_banner/pinghengche.jpg" alt="">
+        <img :src="product.imgPath" alt="">
       </a>
     </div>
   </div>
 </template>
 
 <script>
-  export default {}
+  import {mapState} from 'vuex';
+  export default {
+    computed:{
+      ...mapState(["hotProducts"])
+    },
+    mounted(){
+      this.$store.dispatch('getHomeHotProducts');
+    }
+  };
 </script>
 
 <style lang="stylus" scoped>

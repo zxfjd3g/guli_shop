@@ -16,36 +16,12 @@
           </div>
         </a>
       </li>
-      <li>
+      <li v-for="good in flashShop.products.slice(0,4)" :key="good.id">
         <a href="javascript:;">
-          <img src="/static/image/flash/pinpai1.png" alt=""/>
+          <img :src="good.imgPath" alt=""/>
           <p class="name">小米MIX</p>
           <p class="discount">5月9日-21日享花呗12期分期免息</p>
-          <p class="price">3499元起</p>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:;">
-          <img src="/static/image/flash/pinpai2.png" alt=""/>
-          <p class="name">小米MIX</p>
-          <p class="discount">5月9日-21日享花呗12期分期免息</p>
-          <p class="price">3499元起</p>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:;">
-          <img src="/static/image/flash/pinpai3.png" alt=""/>
-          <p class="name">小米MIX</p>
-          <p class="discount">5月9日-21日享花呗12期分期免息</p>
-          <p class="price">3499元起</p>
-        </a>
-      </li>
-      <li>
-        <a href="javascript:;">
-          <img src="/static/image/flash/pinpai4.png" alt=""/>
-          <p class="name">小米MIX</p>
-          <p class="discount">5月9日-21日享花呗12期分期免息</p>
-          <p class="price">3499元起</p>
+          <p class="price">{{good.msPrice}}元起</p>
         </a>
       </li>
     </ul>
@@ -53,7 +29,15 @@
 </template>
 
 <script>
-  export default {}
+  import {mapState} from 'vuex';
+  export default {
+    computed:{
+      ...mapState(["flashShop"])
+    },
+    mounted(){
+      this.$store.dispatch('getHomeFlashShop');
+    }
+  };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

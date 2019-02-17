@@ -24,3 +24,10 @@ table{width: 360px;height: 240px;border:none;margin: 0 auto;}
 tr,th,td{height: 20px;}
 th{width: 60px;}
 input:focus{border: 2px solid orange;}
+.clearfix::after{
+  content: "";
+  height: 0;
+  display: block;
+  clear: both;
+  visibility: hidden;
+}

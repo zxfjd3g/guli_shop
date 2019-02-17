@@ -1,11 +1,19 @@
 import {
   reqHomeHotSearch,
   reqHomeCates,
+  reqHomeCateList,
+  reqHomeAdv,
+  reqHomeHotProducts,
+  reqHomeFlashShop
 } from '../api'
 
 import {
   RECEIVE_HOME_HOT_SEARCH,
   RECEIVE_HOME_CATES,
+  RECEIVE_HOME_CATELIST,
+  RECEIVE_HOME_ADV,
+  RECEIVE_HOME_HOTPRODUCTS,
+  RECEIVE_HOME_FLASHSHOP
 } from './mutation-type'
 
 export default {
@@ -20,6 +28,31 @@ export default {
     const result = await reqHomeCates()
     if (!result.code) {
       commit(RECEIVE_HOME_CATES, result.data)
+    }
+  },
+  async getHomeCateList({commit},{id,curIndex}) {
+    const result = await reqHomeCateList(id)
+    if (!result.code) {
+      commit(RECEIVE_HOME_CATELIST, {subs:result.data,curIndex})
+    }
+  },
+  async getHomeAdv({commit},cb) {
+    const result = await reqHomeAdv()
+    if (!result.code) {
+      commit(RECEIVE_HOME_ADV,result.data);
+      typeof cb=="function"&&cb();
+    }
+  },
+  async getHomeHotProducts({commit}) {
+    const result = await reqHomeHotProducts()
+    if (!result.code) {
+      commit(RECEIVE_HOME_HOTPRODUCTS,result.data);
+    }
+  },
+  async getHomeFlashShop({commit}) {
+    const result = await reqHomeFlashShop()
+    if (!result.code) {
+      commit(RECEIVE_HOME_FLASHSHOP,result.data);
     }
   },
 

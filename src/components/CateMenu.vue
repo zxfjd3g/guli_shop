@@ -1,40 +1,20 @@
 <template>
   <div id="cate_menu" class="fl">
     <ul>
-      <li v-for="item in homeCates" :key="item.id">
+      <li v-for="(item,index) in homeCates" :key="index" @mouseenter="curIndex=index">
         <a href="">{{item.name}}</a>
       </li>
-      <li>
+      <li v-if="homeCates.length">
         <ul class="pop">
-          <li class="clearfix">
+          <li class="clearfix" v-for="cate in cateList" :key="cate.id">
             <div class="title">
-              手机通讯
+              {{cate.name}}
               <i class="iconfont icon-jiantou_xiangyou"></i>
             </div>
             <ul class="list">
-              <li>
-                <a href="">
-                  手机
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  游戏手机
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  老人机
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  以旧换新
-                </a>
-              </li>
-              <li>
-                <a href="">
-                  手机维修
+              <li v-for="small in cate.subs" :key="small.id">
+                <a href="javascript:;">
+                  {{small.name}}
                 </a>
               </li>
             </ul>
@@ -48,8 +28,22 @@
 <script>
   import {mapState} from 'vuex';
   export default {
+    data(){
+      return {
+        curIndex:0
+      };
+    },
     computed:{
-      ...mapState(["homeCates"])
+      ...mapState(["homeCates"]),
+      cateList(){
+        let data=this.homeCates[this.curIndex].subs;
+        if(data){
+          return data;
+        }else{
+          console.log('+++')
+          this.$store.dispatch('getHomeCateList',{id:this.homeCates[this.curIndex].id,curIndex:this.curIndex});
+        }
+      }
     },
     mounted(){
       this.$store.dispatch('getHomeCates');

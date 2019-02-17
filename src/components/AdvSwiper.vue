@@ -1,17 +1,8 @@
 <template>
   <div class="swiper-container fl">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="/static/image/swiper/swiper1.jpg" alt="">
-      </div>
-      <div class="swiper-slide">
-        <img src="/static/image/swiper/swiper2.jpg" alt="">
-      </div>
-      <div class="swiper-slide">
-        <img src="/static/image/swiper/swiper3.jpg" alt="">
-      </div>
-      <div class="swiper-slide">
-        <img src="/static/image/swiper/swiper4.jpg" alt="">
+      <div class="swiper-slide" v-for="(slide,index) in homeAdv" :key="index">
+        <img :src="slide.imgPath" alt="">
       </div>
     </div>
     <div class="swiper-pagination"></div>
@@ -22,26 +13,34 @@
 
 <script>
   import Swiper from "swiper"
+  import {mapState} from 'vuex'
 
   export default {
+    computed:{
+      ...mapState(['homeAdv'])
+    },
     mounted() {
-      this.swiper = new Swiper(".swiper-container", {
-        loop: true, // 循环模式选项
-        autoplay: {
-          delay: 3000, //3秒切换一次
-          disableOnInteraction: false
-        },
-        // 如果需要分页器
-        pagination: {
-          el: ".swiper-pagination"
-        },
-        observer: true,
-        observeParents: true,
-        // 如果需要前进后退按钮
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
+      this.$store.dispatch('getHomeAdv',()=>{
+        this.$nextTick(()=>{
+          this.swiper = new Swiper(".swiper-container", {
+            loop: true, // 循环模式选项
+            autoplay: {
+              delay: 3000, //3秒切换一次
+              disableOnInteraction: false
+            },
+            // 如果需要分页器
+            pagination: {
+              el: ".swiper-pagination"
+            },
+            observer: true,
+            observeParents: true,
+            // 如果需要前进后退按钮
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev"
+            }
+          });
+        })
       })
     },
   }
