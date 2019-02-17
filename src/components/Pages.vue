@@ -1,32 +1,30 @@
 <template>
   <div class="pages">
-    <div class="pre iconfont icon-jiantou_xiangzuo disable">
-    </div>
-    <div class="active">
-      1
-    </div>
-    <div>
-      2
-    </div>
-    <div>
-      3
-    </div>
-    <div>
-      4
-    </div>
-    <div>
-      5
-    </div>
-    <div>
-      6
-    </div>
-    <div>
-      7
-    </div>
-    <div>
-      8
-    </div>
-    <div class="next iconfont icon-jiantou_xiangyou">
+    <div class="page_wrap">
+      <span class="page_span2">
+        <em>共<b>169</b>页&nbsp;&nbsp;到第</em>
+        <input type="number" value="1">
+        <em>页</em>
+        <a href="javascript:;">确定</a>
+      </span>
+      <span class="page_span1">
+        <a href="javascript:;">
+            < 上一页
+        </a>
+        <a href="javascript:;">1</a>
+        <a href="javascript:;" style="border: 0;font-size: 20px;color: #999;background: #fff">...</a>
+        <a href="javascript:;">4</a>
+        <a href="javascript:;">5</a>
+        <a href="javascript:;">6</a>
+        <a href="javascript:;" class="active">7</a>
+        <a href="javascript:;">8</a>
+        <a href="javascript:;">9</a>
+        <a href="javascript:;" style="border: 0;font-size: 20px;color: #999;background: #fff">...</a>
+        <a href="javascript:;">169</a>
+        <a href="javascript:;">
+            下一页 >
+        </a>
+      </span>
     </div>
   </div>
 </template>
@@ -38,39 +36,77 @@
 </script>
 
 <style lang="stylus" scoped>
-  .pages {
+  .pages
     display flex
     align-items center
     justify-content center
-    margin-top 35px
-    width: 100%;
-    height: 50px;
-    background-color: #f5f5f5
-    div {
-      flex-shrink 0
-      width 48px
-      height 24px
-      line-height 24px
-      padding 3px 0
-      margin 0 7px
-      text-align center
-      color #b0b0b0
-      cursor pointer
-      background: rgba(0, 0, 0, 0);
-      transition all 0.2s
-      &:hover {
-        background: #b0b0b0;
-        color: #fff;
-      }
-      &.active {
-        background-color: #757575;
-        color: #fff;
-      }
-      &.disable {
-        background: rgba(0, 0, 0, 0);
-        color: #b0b0b0;
-        cursor default
-      }
-    }
-  }
+    margin 35px 0 20px
+    width:100%;
+    height:50px;
+    .page_wrap
+      width 1226px
+      .page_span1
+        float: right;
+        .active
+          border: 0;
+          color:#ee2222;
+          background: #fff
+        a
+          font-size: 14px;
+          display: block;
+          float: left;
+          text-decoration: none;
+          height: 36px;
+          background: #f0f0f0;
+          line-height: 36px;
+          padding: 0 14px;
+          margin-right: 5px;
+          border: 1px solid #ddd;
+          &:nth-child(1)
+            color: #ccc;
+            background: #fff;
+
+
+
+      .page_span2
+        float: right;
+        em
+          float: left;
+          line-height: 38px;
+          font-size: 14px;
+          b
+            font-weight: bold;
+
+
+        input
+          float: left;
+          width: 30px;
+          height: 30px;
+          margin: 0 3px;
+          line-height: 30px;
+          font-size: 14px;
+          text-align: center;
+          border: 1px solid #ccc;
+          padding: 3px;
+
+        a
+          float: left;
+          height: 27px;
+          margin-left: 10px;
+          font-size: 14px;
+          line-height: 27px;
+          display: inline-block;
+          border-radius: 2px;
+          background: #f7f7f7;
+          text-align: center;
+          text-decoration: none;
+          cursor: pointer;
+          border: 1px solid #ddd;
+          padding: 4px 13px 5px;
+          color: #666;
+          background-repeat: repeat-x;
+
+
+
+
 </style>

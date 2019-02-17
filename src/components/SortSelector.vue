@@ -1,12 +1,10 @@
 <template>
-  <div class="wrap">
-    <div class="sort">
-      <div :class="{active: orderType===0}" @click="setOrderType(0)">推荐</div>
-      <div :class="{active: orderType===1}" @click="setOrderType(1)">新品</div>
-      <div :class="{active: orderType===2}" @click="setOrderType(2)">
-        价格<i class="iconfont" :class="isAscend?'icon-jiantou_xiangshang':'icon-jiantou_xiangxia'"></i>
-      </div>
-      <div :class="{active: orderType===3}" @click="setOrderType(3)">评论最多</div>
+  <div class="sort">
+    <div class="list">
+      <div class="active">推荐</div>
+      <div>新品</div>
+      <div>价格<i class="iconfont icon-jiantou_xiangshang"></i></div>
+      <div>评论最多</div>
     </div>
   </div>
 </template>
@@ -25,11 +23,11 @@
   }
 </script>
 <style lang="stylus" scoped>
-  .wrap
+  .sort
     width 100%
     height 81px
     background-color #f5f5f5
-    .sort
+    .list
       width 1226px
       height 81px
       margin 0 auto

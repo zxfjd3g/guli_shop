@@ -10,7 +10,6 @@
       AdvSwiper
       HotProducts
       FlashShop
-        ProductCard
       Recommend
         RecommendCard
     3. Detail.vue
@@ -30,6 +29,7 @@
           OrderCard.vue
     9. AddSuccess.vue
     10. Settlement.vue
+
 ## 接口
-    1. 获取购物车 
-    
+    1. 获取购物车不可用 
+    2. 登陆/注册功能确定
