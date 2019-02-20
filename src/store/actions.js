@@ -4,7 +4,8 @@ import {
   reqHomeCateList,
   reqHomeAdv,
   reqHomeHotProducts,
-  reqHomeFlashShop
+  reqHomeFlashShop,
+  reqProductInfo
 } from '../api'
 
 import {
@@ -13,7 +14,8 @@ import {
   RECEIVE_HOME_CATELIST,
   RECEIVE_HOME_ADV,
   RECEIVE_HOME_HOTPRODUCTS,
-  RECEIVE_HOME_FLASHSHOP
+  RECEIVE_HOME_FLASHSHOP,
+  RECEIVE_PRODUCT_INFO
 } from './mutation-type'
 
 export default {
@@ -56,12 +58,13 @@ export default {
     }
   },
 
-  // async getProductDetail({commit}, id) {
-  //   const result = await reqProductDetail(id)
-  //   if (!result.code) {
-  //     commit(RECEIVE_PRODUCT_DETAIL, result.data)
-  //   }
-  // },
+  async getProductDetail({commit}, {id,cb}) {
+    const result = await reqProductInfo(id);
+    if (!result.code) {
+      commit(RECEIVE_PRODUCT_INFO, result.data);
+      typeof cb=="function"&&cb();
+    }
+  },
 
   // async search({commit}, searchWord) {
   //   const result = await reqSearch(searchWord)

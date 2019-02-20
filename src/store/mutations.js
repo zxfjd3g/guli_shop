@@ -4,7 +4,8 @@ import {
   RECEIVE_HOME_CATELIST,
   RECEIVE_HOME_ADV,
   RECEIVE_HOME_HOTPRODUCTS,
-  RECEIVE_HOME_FLASHSHOP
+  RECEIVE_HOME_FLASHSHOP,
+  RECEIVE_PRODUCT_INFO
 } from './mutation-type'
 
 export default {
@@ -26,25 +27,7 @@ export default {
   [RECEIVE_HOME_FLASHSHOP](state, data) {
     state.flashShop = data;
   },
-  //
-  // [RECEIVE_HOME_DATA](state, homeData) {
-  //   state.homeData = homeData
-  // },
-  //
-  // [RECEIVE_PRODUCT_DETAIL](state, productDetail) {
-  //   state.productDetail = productDetail
-  // },
-  //
-  // [RECEIVE_SEARCH](state, {classifys, products}) {
-  //   state.products = products
-  //   state.classifys = classifys
-  // },
-  //
-  // [RECEIVE_USER](state, user) {
-  //   state.user = user
-  // },
-  //
-  // [RECEIVE_ORDERS](state, orders) {
-  //   state.orders = orders
-  // }
+  [RECEIVE_PRODUCT_INFO](state, data) {
+    state.productInfo = data;
+  },
 }

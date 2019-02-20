@@ -10,12 +10,6 @@ export const RECEIVE_HOME_HOTPRODUCTS="'receive_home_hotproducts";
 
 export const RECEIVE_HOME_FLASHSHOP="'receive_home_flashshop";
 
-export const RECEIVE_HOME_DATA="receive_home_data"
+export const RECEIVE_HOME_DATA="receive_home_data";
 
-export const RECEIVE_PRODUCT_DETAIL="receive_product_detail"
-
-export const RECEIVE_SEARCH="receive_search"
-
-export const RECEIVE_USER="receive_user"
-
-export const RECEIVE_ORDERS="receive_orders"
+export const RECEIVE_PRODUCT_INFO="receive_product_info";

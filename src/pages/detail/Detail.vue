@@ -3,7 +3,7 @@
     <Nav/>
     <div class="xiangqing">
       <div class="neirong w">
-        <div class="xiaomi6 fl">小米88</div>
+        <div class="xiaomi6 fl" v-if="productInfo.baseDetail">{{productInfo.baseDetail.name}}</div>
         <nav class="fr">
           <li><a href="">概述</a></li>
           <li>|</li>
@@ -22,40 +22,19 @@
       </div>
     </div>
 
-    <div class="jieshao mt20 w clearfix">
+    <div class="jieshao mt20 w clearfix" v-if="productInfo.baseDetail">
       <div class="left fl" style="position: relative;">
-        <div class="hiddenbox">
+        <div class="hiddenbox" @mousemove="handleMove">
         </div>
-        <img src="/static/image/detail/xiaomi6_small.jpg">
-        <div class="smallbox"></div>
+        <img :src="imgPath">
+        <div class="smallbox" ref="smallbox"></div>
         <div class="bigbox">
-          <img src="/static/image/detail/xiaomi6_big.jpg">
+          <img :src="imgPath" ref="bigImg">
         </div>
         <div class="swiper-container swiper-container-horizontal">
           <div class="swiper-wrapper">
-            <div class="swiper-slide active">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
-            </div>
-            <div class="swiper-slide">
-              <img src="/static/image/detail/liebiao_xiaomi6.jpg" alt="">
+            <div class="swiper-slide" :class="imgPath==img?'active':''" @click="imgPath=img" v-for="(img,index) in productInfo.baseDetail.imgPath.slice(1)" :key="index">
+              <img :src="img" alt="">
             </div>
           </div>
           <!-- Add Arrows -->
@@ -64,50 +43,43 @@
         </div>
       </div>
       <div class="right fr">
-        <div class="h3 ml20 mt20">小米6</div>
+        <div class="h3 ml20 mt20">{{productInfo.baseDetail.name}}</div>
         <div class="jianjie mr40 ml20 mt10">变焦双摄，4 轴防抖 / 骁龙835 旗舰处理器，6GB 大内存，最大可选128GB 闪存 / 5.15" 护眼屏 / 四曲面玻璃/陶瓷机身</div>
-        <div class="jiage ml20 mt10">2499.00元</div>
+        <div class="jiage ml20 mt10">{{productInfo.baseDetail.price}}元</div>
         <div class="ft20 ml20 mt20">选择版本</div>
         <div class="xzbb ml20 mt10">
-          <div class="banben fl">
+          <div class="banben fl" :class="curVersion==version?'active':''" @click="curVersion=version" v-for="version in productInfo.props[1].propVals" :key="version.id">
             <a>
-              <span>全网通版 6GB+64GB </span>
+              <span>{{version.name}}</span>
               <span>2499元</span>
-            </a>
-          </div>
-          <div class="banben fr">
-            <a>
-              <span>全网通版 6GB+128GB</span>
-              <span>2899元</span>
-            </a>
-          </div>
-          <div class="banben fl">
-            <a>
-              <span>联通版 6GB+64GB </span>
-              <span>2299元</span>
-            </a>
-          </div>
-          <div class="banben fl">
-            <a>
-              <span>移动版 6GB+64GB </span>
-              <span>2199元</span>
             </a>
           </div>
           <div class="clear"></div>
         </div>
         <div class="ft20 ml20 mt20">选择颜色</div>
         <div class="xzbb ml20 mt10">
-          <div class="banben">
+          <div class="banben" :class="curColor==color?'active':''" @click="curColor=color" v-for="color in productInfo.props[0].propVals" :key="color.id">
             <a>
-              <span class="yuandian"></span>
-              <span class="yanse">亮黑色</span>
+              <!--<span class="yuandian"></span>-->
+              <img :src="color.img" alt="">
+              <span class="yanse">{{color.name}}</span>
             </a>
           </div>
-
+          <div class="clear"></div>
+        </div>
+        <div class="ft20 ml20 mt20">选择套餐</div>
+        <div class="xzbb ml20 mt10">
+          <div class="banben" :class="curGroup==group?'active':''" @click="curGroup=group" v-for="group in productInfo.props[2].propVals" :key="group.id">
+            <a>
+              <!--<span class="yuandian"></span>-->
+              <span class="yanse">{{group.name}}</span>
+            </a>
+          </div>
+          <div class="clear"></div>
         </div>
         <div class="xqxq mt20 ml20">
           <div class="top1 mt10">
-            <div class="left1 fl">小米6 全网通版 6GB内存 64GB 亮黑色</div>
+            <div class="left1 fl">{{curText}}</div>
             <div class="right1 fr">2499.00元</div>
             <div class="clear"></div>
           </div>
@@ -125,22 +97,71 @@
 </template>
 <script>
   import Swiper from 'swiper'
+  import {mapState} from 'vuex'
 
   export default {
+    data(){
+      return {
+        id:123,
+        imgPath:'',
+        curVersion:{},
+        curColor:{},
+        curGroup:{}
+      }
+    },
+    computed:{
+      ...mapState(['productInfo']),
+      curText(){
+        let {curVersion,curColor,curGroup} =this;
+        let text=curVersion.name+' '+curColor.name+' '+curGroup.name;
+        return text;
+      }
+    },
+    watch:{
+      productInfo(value){
+        console.log('123');
+        this.imgPath=this.productInfo.baseDetail.imgPath[1];
+        this.curColor=this.productInfo.props[0].propVals[0];
+        this.curVersion=this.productInfo.props[1].propVals[0];
+        this.curGroup=this.productInfo.props[2].propVals[0];
+      }
+    },
+    methods:{
+      handleMove(e){
+        let {smallbox,bigImg}=this.$refs;
+        let left=e.offsetX-140;
+        let top=e.offsetY-140;
+        let maxLeft=560-280;
+        let maxTop=maxLeft;
+        let scale=2;
+        left=left<=0?0:left;
+        top=top<=0?0:top;
+        left=left<=maxLeft?left:maxLeft;
+        top=top<=maxTop?top:maxTop;
+        smallbox.style.transform=`translate(${left}px,${top}px)`;
+        bigImg.style.transform=`translate(${-left*scale}px,${-top*scale}px)`;
+      }
+    },
     mounted() {
-      new Swiper('.swiper-container', {
-        slidesPerView: 5,
-        centeredSlides: false,
-        spaceBetween: 30,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      })
+      this.$store.dispatch('getProductDetail',{
+        id:this.id,
+        cb:()=>{
+          this.$nextTick(()=>{
+            new Swiper('.swiper-container', {
+              slidesPerView: 5,
+              centeredSlides: false,
+              spaceBetween: 30,
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+              },
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+              },
+            })
+          })
+        }});
     },
   }
 </script>

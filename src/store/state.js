@@ -4,10 +4,5 @@ export default {
   homeAdv:[],
   hotProducts:[],
   flashShop:[],
-  homeData: {},
-  productDetail: {},
-  products: [],
-  classifys: [],
-  user: {},
-  orders: []
+  productInfo: {}
 }
