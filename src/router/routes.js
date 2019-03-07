@@ -5,12 +5,13 @@ import Login from '../pages/login/Login.vue'
 import Register from '../pages/register/Register.vue'
 import Search from '../pages/search/Search.vue'
 import Personal from '../pages/personal/Personal.vue'
-
 import SelfInfo from '../pages/personal/SelfInfo.vue'
 import Order from '../pages/personal/Order.vue'
 import Message from '../pages/personal/Message.vue'
 import Discount from '../pages/personal/Discount.vue'
 import Address from '../pages/personal/Address.vue'
+import AddSuccess from '../pages/add_success/AddSuccess.vue'
+import Settlement from '../pages/settlement/Settlement.vue'
 
 export default [
   {
@@ -66,5 +67,15 @@ export default [
         component: Address
       }
     ]
-  }
+  },
+
+  {
+    path: '/add_success',
+    component: AddSuccess
+  },
+
+  {
+    path: '/settlement',
+    component: Settlement
+  },
 ]
