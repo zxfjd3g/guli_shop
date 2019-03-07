@@ -58,173 +58,50 @@
       </div>
       <div class="nav_logo">
         <!--品牌-->
-        <div class="nav_wrap">
+        <div v-for="classify in searchProps" :class="classify.id==1?'nav_wrap':'pre'">
           <div class="sl_key">
-            <span>品牌：</span>
+            <span>{{classify.name}}：</span>
           </div>
           <div class="sl_value">
-            <div class="sl_value_logo">
+            <div class="sl_value_logo" v-if="classify.id==1">
               <ul>
-                <li>
+                <li v-for="prop in classify.propVals" :key="prop.id">
                   <a href="javascript:;">
-                    <img src="/static/image/search/598033b4nd6055897.jpg" alt="">
+                    <img :src="prop.img" alt="" v-if="prop.img">
+                    <span v-else>{{prop.name}}</span>
                     <div>
-                      华为(HUAWEI)
+                      {{prop.name}}
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="javascript:;">
-                    <img src="/static/image/search/598042c9n6e4e79e5.jpg" alt="">
-                    <div>
-                      小米(MI)
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="javascript:;">
-                    <img src="/static/image/search/574d36dbn262ef26d.jpg" alt="">
-                    <div>
-                      Apple
-                    </div>
-                  </a>
-                </li>
-                <li><a href="javascript:;"><img src="/static/image/search/57fdf4b8n6e95624d.jpg" alt="">
-                  <div>
-                    魅族(MEIZU)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/5716e2c4nc925baf3.jpg" alt="">
-                  <div>
-                    三星(SAMSUNG)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/591aa1abn602ebecf.jpg" alt="">
-                  <div>
-                    360
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/56b2f385n8e4eb051.jpg" alt="">
-                  <div>
-                    oppo
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/563b3484n9ba68e13.jpg" alt="">
-                  <div>
-                    vivo
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/563b33ffn9c288c6c.jpg" alt="">
-                  <div>
-                    一加
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/563b33d4n6c59780c.jpg" alt="">
-                  <div>
-                    诺基亚（NOKIA）
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/5631ccdene8df5efb.jpg" alt="">
-                  <div>
-                    锤子(smartisan)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/58f74d5an23fc1dff.jpg" alt="">
-                  <div>
-                    金立(Gionee)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/5670cf96ncffa2ae6.jpg" alt="">
-                  <div>
-                    酷派(Coolpad)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/5631cd12n7548352d.jpg" alt="">
-                  <div>
-                    努比亚(nubia)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/56a855a3ne38ee719.jpg" alt="">
-                  <div>
-                    中兴(ZTE)
-                  </div>
-                </a></li>
-                <li><a href="javascript:;"><img src="/static/image/search/5836e479n88a98abb.jpg" alt="">
-                  <div>
-                    美图(meitu)
-                  </div>
-                </a></li>
               </ul>
+            </div>
+            <ul class="nomore" v-if="classify.id!=1">
+              <li v-for="prop in classify.propVals" :key="prop.id">
+                <input type="checkbox">
+                <a href="javascript:;">{{prop.name}}</a>
+              </li>
+            </ul>
+            <div class="select" v-if="classify.id!=1">
+              <button class="confirm" disabled>确定</button>
+              <button class="cancel">取消</button>
             </div>
           </div>
           <div class="sl_ext">
-            <a href="javascript:;">
+            <a href="javascript:;" class="sl_ext_show">
               更多
               <i style='background: url("/static/image/search/search.ele.png")no-repeat 3px 7px'></i>
               <b style='background: url("/static/image/search/search.ele.png")no-repeat 3px -44px'></b>
             </a>
-            <a href="javascript:;">
+            <a href="javascript:;" class="moreCheck">
               多选
               <i>+</i>
-              <span>+</span>
+              <!-- <span>+</span> -->
             </a>
           </div>
         </div>
-        <!--价格-->
-        <div class="pre">
-          <div class="sl_key">
-            <span>价格：</span>
-          </div>
-          <div class="sl_value">
-            <ul>
-              <li><a href="javascript:;">0-499</a></li>
-              <li><a href="javascript:;">500-999</a></li>
-              <li><a href="javascript:;">1000-1699</a></li>
-              <li><a href="javascript:;">1700-2799</a></li>
-              <li><a href="javascript:;">2800-4499</a></li>
-              <li><a href="javascript:;">4500-11999</a></li>
-              <li><a href="javascript:;">12000以上</a></li>
-              <li class="sl_value_li">
-                <input type="text">
-                <p>-</p>
-                <input type="text">
-                <a href="javascript:;">确定</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!--系统-->
-        <div class="pre">
-          <div class="sl_key">
-            <span>系统：</span>
-          </div>
-          <div class="sl_value">
-            <ul>
-              <li><a href="javascript:;">0-安卓（Android）</a></li>
-              <li><a href="javascript:;">苹果（IOS）</a></li>
-              <li><a href="javascript:;">微软（WindowsPhone）</a></li>
-              <li><a href="javascript:;">基础功能机系统 </a></li>
-              <li><a href="javascript:;">其他</a></li>
-            </ul>
-          </div>
-        </div>
-        <!--屏幕尺寸-->
-        <div class="pre">
-          <div class="sl_key">
-            <span>屏幕尺寸：</span>
-          </div>
-          <div class="sl_value">
-            <ul>
-              <li><a href="javascript:;">5.56英寸及以上</a></li>
-              <li><a href="javascript:;">5.5-5.1英寸</a></li>
-              <li><a href="javascript:;">5.0-4.6英寸</a></li>
-              <li><a href="javascript:;">4.5-3.1英寸</a></li>
-              <li><a href="javascript:;">3.0英寸以下</a></li>
-            </ul>
-          </div>
-        </div>
         <!--热点-->
-        <div class="pre">
+        <!-- <div class="pre">
           <div class="sl_key">
             <span>热点：</span>
           </div>
@@ -368,68 +245,16 @@
               <span>+</span>
             </a>
           </div>
-        </div>
-        <!--机身颜色-->
-        <div class="pre">
-          <div class="sl_key">
-            <span>机身颜色：</span>
-          </div>
-          <div class="sl_value">
-            <ul>
-              <li><a href="javascript:;">白色</a></li>
-              <li><a href="javascript:;">黑色</a></li>
-              <li><a href="javascript:;">灰色</a></li>
-              <li><a href="javascript:;">金色</a></li>
-              <li><a href="javascript:;">银色</a></li>
-              <li><a href="javascript:;">红色</a></li>
-              <li><a href="javascript:;">蓝色</a></li>
-              <li><a href="javascript:;">粉色</a></li>
-              <li><a href="javascript:;">黄的</a></li>
-              <li><a href="javascript:;">蓝色</a></li>
-            </ul>
-          </div>
-          <div class="sl_ext">
-            <a href="javascript:;"></a>
-            <a href="javascript:;">
-              多选
-              <i>+</i>
-              <span>+</span>
-            </a>
-          </div>
-        </div>
-        <!--机身内存-->
-        <div class="pre" style="border: 0">
-          <div class="sl_key">
-            <span>机身内存：</span>
-          </div>
-          <div class="sl_value">
-            <ul>
-              <li><a href="javascript:;">16G</a></li>
-              <li><a href="javascript:;">8G</a></li>
-              <li><a href="javascript:;">256G</a></li>
-              <li><a href="javascript:;">128G</a></li>
-              <li><a href="javascript:;">64G</a></li>
-              <li><a href="javascript:;">32G</a></li>
-              <li><a href="javascript:;">8G以下</a></li>
-              <li><a href="javascript:;">支持内存卡</a></li>
-            </ul>
-          </div>
-          <div class="sl_ext">
-            <a href="javascript:;"></a>
-            <a href="javascript:;">
-              多选
-              <i>+</i>
-              <span>+</span>
-            </a>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
   export default {
-
+    props:{
+      searchProps:Array
+    }
   }
 </script>
 <style lang="stylus" scoped>

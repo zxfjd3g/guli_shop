@@ -4,5 +4,7 @@ export default {
   homeAdv:[],
   hotProducts:[],
   flashShop:[],
-  productInfo: {}
+  productInfo: {},
+  searchInfo:{},
+  cartList:[]
 }

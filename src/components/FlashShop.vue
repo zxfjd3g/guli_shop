@@ -19,7 +19,7 @@
       <li v-for="good in flashShop.products.slice(0,4)" :key="good.id">
         <a href="javascript:;">
           <img :src="good.imgPath" alt=""/>
-          <p class="name">小米MIX</p>
+          <p class="name">{{good.name}}</p>
           <p class="discount">5月9日-21日享花呗12期分期免息</p>
           <p class="price">{{good.msPrice}}元起</p>
         </a>

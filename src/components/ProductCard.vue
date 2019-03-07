@@ -2,19 +2,21 @@
   <div class="pc">
     <div class="sub_mingxing">
       <a href="./xiangqing.html" target="_blank">
-        <img src="/static/image/search/liebiao_xiaomi6.jpg" alt="">
+        <img :src="product.imgPath[1]" alt="">
       </a>
     </div>
     <div class="pinpai">
-      <a href="./xiangqing.html" target="_blank">小米6</a>
+      <a href="./xiangqing.html" target="_blank">{{product.name}}</a>
     </div>
     <div class="youhui">5.16早10点开售</div>
-    <div class="jiage">2499.00元</div>
+    <div class="jiage">{{product.price}}元</div>
   </div>
 </template>
 <script>
   export default {
-
+    props:{
+      product:Object
+    }
   }
 </script>
 <style lang="stylus" scoped>

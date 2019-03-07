@@ -1,23 +1,69 @@
 <template>
   <div class="content2 center">
     <div class="sub_content fl ">
-      <input type="checkbox" value="quanxuan" class="quanxuan"/>
+      <input type="checkbox" v-model="isBuy" class="quanxuan" @click="checkBuy"/>
     </div>
-    <div class="sub_content fl"><img src="/static/image/cart/gwc_xiaomi6.jpg"></div>
-    <div class="sub_content fl ft20">小米6全网通6GB内存+64GB 亮黑色</div>
-    <div class="sub_content fl ">2499元</div>
+    <div class="sub_content fl"><img :src="product.imgPath[0]"></div>
+    <div class="sub_content fl ft20">{{product.name}}</div>
+    <div class="sub_content fl ">{{product.price}}元</div>
     <div class="sub_content fl">
-      <input class="shuliang" type="number" value="1" step="1" min="1">
+      <input class="shuliang" type="number" v-model="count"  @mouseout="updateGood" step="1" min="1">
     </div>
-    <div class="sub_content fl">2499元</div>
-    <div class="sub_content fl"><a href="">×</a></div>
+    <div class="sub_content fl">{{totalPrice}}元</div>
+    <div class="sub_content fl"><a @click="remove">×</a></div>
     <div class="clear"></div>
   </div>
 </template>
 
 <script>
   export default {
-
+    data() {
+      return {
+        count: this.good.count,
+        isBuy: false
+      };
+    },
+    props:{
+      good:Object,
+      addBuy: Function,
+      removeBuy: Function,
+      removeGood: Function
+    },
+    computed:{
+      product(){
+        let product=this.good.product;
+        return product;
+      },
+      totalPrice() {
+        return this.good.count * this.product.price;
+      },
+    },
+    methods: {
+      updateGood() {
+        const count = this.count * 1;
+        this.good.count = count;
+        this.$store.dispatch('getCartUpdate',{id:this.product.id,count,cb:this.cb})
+      },
+      remove() {
+        const {good, removeGood} = this;
+        if (confirm("确定要从购物车中删除该商品吗?")) {
+          removeGood(good);
+          //接下来删除localStorage中的商品
+        }
+      },
+      checkBuy() {
+        this.isBuy = !this.isBuy;
+        const {isBuy, good, addBuy, removeBuy} = this;
+        if (isBuy) {
+          addBuy(good);
+        } else {
+          removeBuy(good);
+        }
+      },
+      cb(msg){
+        alert(msg);
+      }
+    }
   }
 </script>
 
@@ -34,6 +80,7 @@
       white-space nowrap
       img
         vertical-align: middle;
+        width:100%;
 
       &:nth-of-type(1)
         margin-left: 30px;

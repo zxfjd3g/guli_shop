@@ -13,3 +13,8 @@ export const RECEIVE_HOME_FLASHSHOP="'receive_home_flashshop";
 export const RECEIVE_HOME_DATA="receive_home_data";
 
 export const RECEIVE_PRODUCT_INFO="receive_product_info";
+
+export const RECEIVE_SEARCH_INFO="receive_search_info";
+
+export const RECEIVE_CART_LIST="receive_cart_list";
+

@@ -31,11 +31,11 @@ export const reqCartList = () => ajax(`${BASE}/cart/list`);
 //更新商品
 export const reqCartUpdate = ({id,count}) => ajax(`${BASE}/cart/update`,{id,count});
 //删除商品
-export const reqCartDelete = (id) => ajax(`${BASE}/cart/delete`,{id});
+export const reqCartDelete = ({id}) => ajax(`${BASE}/cart/delete`,{id});
 //选中/取消选中商品
 export const reqCartCheck = ({id,type}) => ajax(`${BASE}/cart/check`,{id,type});
 //全选/取消全选商品
-export const reqCartCheckAll = (type) => ajax(`${BASE}/cart/checkAll`,{type});
+export const reqCartCheckAll = ({type}) => ajax(`${BASE}/cart/checkAll`,{type});
 
 //Order
 //获取订单列表

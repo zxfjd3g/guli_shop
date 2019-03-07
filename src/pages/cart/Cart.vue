@@ -1,9 +1,9 @@
 <template>
   <div id="cart">
     <div class="banner_x center">
-      <a href="./index.html" target="_blank">
+      <router-link to="/">
         <div class="logo fl"></div>
-      </a>
+      </router-link>
       <div class="wdgwc fl ml40">我的购物车</div>
       <div class="wxts fl ml20">温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</div>
       <div class="dlzc fr">
@@ -16,7 +16,7 @@
       <div class="gwcxd center">
         <div class="top2 center">
           <div class="sub_top fl">
-            <input type="checkbox" value="quanxuan" class="quanxuan"/>全选
+            <input type="checkbox" v-model="checkAll" class="quanxuan" @click="isCheckAll"/>全选
           </div>
           <div class="sub_top fl">商品名称</div>
           <div class="sub_top fl">单价</div>
@@ -25,20 +25,26 @@
           <div class="sub_top fr">操作</div>
           <div class="clear"></div>
         </div>
-        <CartItem/>
-        <CartItem/>
+        <CartItem v-for="good in goods"
+                  :good="good"
+                  :key="good.id"
+                  :addBuy="addBuy"
+                  :removeBuy="removeBuy"
+                  :removeGood="removeGood"
+                  :ref="good.product.id"
+        />
       </div>
       <div class="jiesuandan mt20 center">
         <div class="tishi fl ml20">
           <ul>
             <li><a href="./liebiao.html">继续购物</a></li>
             <li>|</li>
-            <li>共<span>2</span>件商品，已选择<span>1</span>件</li>
+            <li>共<span>{{sum}}</span>件商品，已选择<span>{{selectCount}}</span>件</li>
             <div class="clear"></div>
           </ul>
         </div>
         <div class="jiesuan fr">
-          <div class="jiesuanjiage fl">合计（不含运费）：<span>2499.00元</span></div>
+          <div class="jiesuanjiage fl">合计（不含运费）：<span>{{totalPrice}}元</span></div>
           <div class="jsanniu fr"><input class="jsan" type="submit" name="jiesuan" value="去结算"/></div>
           <div class="clear"></div>
         </div>
@@ -48,9 +54,103 @@
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex';
   import CartItem from "../../components/CartItem.vue";
 
   export default {
+    data() {
+      return {
+        goods: [],
+        buyGoods: [],
+        checkAll: false
+      };
+    },
+    computed:{
+      ...mapState(["cartList"]),
+      sum() {
+        return this.goods.reduce((pre, good) => {
+          return pre + good.count;
+        }, 0);
+      },
+      selectCount() {
+        return this.buyGoods.reduce((pre, good) => {
+          return pre + good.count;
+        }, 0);
+      },
+      totalPrice() {
+        return this.buyGoods.reduce((pre, good) => {
+          return pre + good.count * good.product.price;
+        }, 0);
+      }
+    },
+    methods: {
+      addBuy(good) {
+        this.buyGoods.push(good);
+        if (this.buyGoods.length == this.goods.length) {
+          this.checkAll = true;
+        }
+        this.$store.dispatch('getCartCheck',{id:good.product.id,type:1,cb:this.cb});
+      },
+      removeBuy(good) {
+        this.buyGoods = this.buyGoods.filter((item, index) => {
+          return item.id !== good.id;
+        });
+        this.checkAll = false;
+        this.$store.dispatch('getCartCheck',{id:good.product.id,type:0,cb:this.cb});
+      },
+      removeGood(good) {
+        let shopgood = {};
+        this.removeBuy(good);
+        this.goods = this.goods.filter((item, index) => {
+          return item.id !== good.id;
+        });
+        this.buyGoods = this.buyGoods.filter((item, index) => {
+          return item.id !== good.id;
+        });
+        if (this.buyGoods.length == this.goods.length) {
+          this.checkAll = true;
+        } else {
+          this.checkAll = false;
+        }
+        this.goods.forEach((good, index) => {
+          shopgood[good.id] = good;
+        })
+        this.$store.dispatch('getCartDelete',{id:good.product.id,cb:this.cb});
+      },
+      isCheckAll() {
+        this.checkAll = !this.checkAll;
+        const {checkAll, $refs, goods} = this;
+        let refs = Object.values($refs);
+        if (checkAll) {
+          this.buyGoods = goods;
+        } else {
+          this.buyGoods = [];
+        }
+        refs.forEach((item, index) => {
+          item[0].isBuy = checkAll;
+        });
+        this.$store.dispatch('getCartCheckAll',{type:checkAll*1,cb:this.cb})
+      },
+      cb(msg){
+        alert(msg);
+      }
+    },
+    watch: {
+      buyGoods() {
+        const {buyGoods, goods} = this;
+        if (buyGoods.length === goods.length) {
+          this.checkAll = true;
+        } else {
+          this.checkAll = false;
+        }
+      },
+      cartList(){
+        this.goods=this.cartList;
+      }
+    },
+    mounted(){
+      this.$store.dispatch('getCartList');
+    },
     components: {
       CartItem
     }

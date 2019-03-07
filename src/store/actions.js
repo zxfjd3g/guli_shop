@@ -6,7 +6,13 @@ import {
   reqHomeHotProducts,
   reqHomeFlashShop,
   reqProductInfo,
-  reqCartAdd
+  reqCartAdd,
+  reqSearch,
+  reqCartList,
+  reqCartUpdate,
+  reqCartDelete,
+  reqCartCheck,
+  reqCartCheckAll
 } from '../api'
 
 import {
@@ -16,7 +22,9 @@ import {
   RECEIVE_HOME_ADV,
   RECEIVE_HOME_HOTPRODUCTS,
   RECEIVE_HOME_FLASHSHOP,
-  RECEIVE_PRODUCT_INFO
+  RECEIVE_PRODUCT_INFO,
+  RECEIVE_SEARCH_INFO,
+  RECEIVE_CART_LIST
 } from './mutation-type'
 
 export default {
@@ -73,6 +81,50 @@ export default {
       typeof cb=="function"&&cb();
     }
   },
+
+  async getSearch({commit}) {
+    const result = await reqSearch();
+    if (!result.code) {
+      commit(RECEIVE_SEARCH_INFO, result.data);
+    }
+  },
+
+  async getCartList({commit}) {
+    const result = await reqCartList();
+    if (!result.code) {
+      commit(RECEIVE_CART_LIST, result.data);
+    }
+  },
+
+  async getCartUpdate({commit},{id,count,cb}) {
+    const result = await reqCartUpdate({id,count});
+    if (result.code&&typeof cb=="function") {
+      cb(result.msg);
+    }
+  },
+
+  async getCartDelete({commit},{id,cb}) {
+    const result = await reqCartDelete({id});
+    if (result.code&&typeof cb=="function") {
+      cb(result.msg);
+    }
+  },
+
+  async getCartCheck({commit},{id,type,cb}) {
+    const result = await reqCartCheck({id,type});
+    if (result.code&&typeof cb=="function") {
+      cb(result.msg);
+    }
+  },
+
+  async getCartCheckAll({commit},{type,cb}) {
+    const result = await reqCartCheckAll({type});
+    if (result.code&&typeof cb=="function") {
+      cb(result.msg);
+    }
+  },
+
+  
 
   // async search({commit}, searchWord) {
   //   const result = await reqSearch(searchWord)

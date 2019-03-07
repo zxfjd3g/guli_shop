@@ -5,7 +5,9 @@ import {
   RECEIVE_HOME_ADV,
   RECEIVE_HOME_HOTPRODUCTS,
   RECEIVE_HOME_FLASHSHOP,
-  RECEIVE_PRODUCT_INFO
+  RECEIVE_PRODUCT_INFO,
+  RECEIVE_SEARCH_INFO,
+  RECEIVE_CART_LIST
 } from './mutation-type'
 
 export default {
@@ -29,5 +31,11 @@ export default {
   },
   [RECEIVE_PRODUCT_INFO](state, data) {
     state.productInfo = data;
+  },
+  [RECEIVE_SEARCH_INFO](state, data) {
+    state.searchInfo = data;
+  },
+  [RECEIVE_CART_LIST](state, data) {
+    state.cartList = data;
   },
 }
