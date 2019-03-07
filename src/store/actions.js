@@ -5,7 +5,8 @@ import {
   reqHomeAdv,
   reqHomeHotProducts,
   reqHomeFlashShop,
-  reqProductInfo
+  reqProductInfo,
+  reqCartAdd
 } from '../api'
 
 import {
@@ -62,6 +63,13 @@ export default {
     const result = await reqProductInfo(id);
     if (!result.code) {
       commit(RECEIVE_PRODUCT_INFO, result.data);
+      typeof cb=="function"&&cb();
+    }
+  },
+
+  async getCartAdd({commit}, {id,count,cb}) {
+    const result = await reqCartAdd({id,count});
+    if (!result.code) {
       typeof cb=="function"&&cb();
     }
   },

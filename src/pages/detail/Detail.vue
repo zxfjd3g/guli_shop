@@ -87,7 +87,7 @@
         </div>
         <div class="xiadan ml20 mt20">
           <input class="jrgwc" type="button" name="jrgwc" value="立即选购"/>
-          <input class="jrgwc" type="button" name="jrgwc" value="加入购物车"/>
+          <input class="jrgwc" type="button" @click="addGood" name="jrgwc" value="加入购物车"/>
 
         </div>
       </div>
@@ -140,6 +140,12 @@
         top=top<=maxTop?top:maxTop;
         smallbox.style.transform=`translate(${left}px,${top}px)`;
         bigImg.style.transform=`translate(${-left*scale}px,${-top*scale}px)`;
+      },
+      addGood(){
+        this.$store.dispatch('getCartAdd',{id:this.id,count:1,cb:()=>{
+          //跳转到addSuccess页面
+            alert('商品添加成功,跳转到addSuccess页面')
+          }});
       }
     },
     mounted() {
