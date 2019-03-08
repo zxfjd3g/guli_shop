@@ -1,13 +1,13 @@
 <template>
   <div class="ddxq">
-    <div class="ddspt fl"><img src="/static/image/order/gwc_xiaomi6.jpg" alt=""></div>
+    <div class="ddspt fl"><img :src="order.items[0].imgPath" alt=""></div>
     <div class="ddbh fl">订单号:1705205643098724</div>
     <div class="ztxx fr">
       <ul>
-        <li>已发货</li>
-        <li>￥2499.00</li>
-        <li>2017/05/20 13:30</li>
-        <li><a href="">订单详情></a></li>
+        <li>{{order.payStatus}}</li>
+        <li>￥{{order.totalAmount}}</li>
+        <li class="createTime">{{order.creatTime}}</li>
+        <li><a href="javascript:;">订单详情></a></li>
         <div class="clear"></div>
       </ul>
     </div>
@@ -17,7 +17,9 @@
 <script>
 
   export default {
-
+    props:{
+      order:Object
+    }
   }
 </script>
 <style lang="stylus" scoped>
@@ -34,6 +36,9 @@
       height 80px
       margin 19px 25px 0 0
       border 1px solid #aaa
+      img
+        width 100%
+        height 100%
     .ztxx
       ul
         li
@@ -45,6 +50,8 @@
           border-left 1px solid #aaa
           margin-top 30px
           text-align center
+          &.createTime
+            line-height 30px
           a
             color rgb(117,117,117)
             &:hover

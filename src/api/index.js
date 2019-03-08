@@ -55,7 +55,7 @@ export const reqUserInfo = () => ajax(`${BASE}/user/info`,{},'POST');
 //登陆
 export const reqLogin = ({username,password}) => ajax(`${BASE}/user/login`,{username,password},'POST');
 //注册
-export const reqRegister = () => ajax(`${BASE}/user/regist`,{},'POST');
+export const reqRegister = ({phone,code}) => ajax(`${BASE}/user/regist`,{phone,code},'POST');
 
 //Pay
 //支付

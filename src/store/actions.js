@@ -12,7 +12,10 @@ import {
   reqCartUpdate,
   reqCartDelete,
   reqCartCheck,
-  reqCartCheckAll
+  reqCartCheckAll,
+  reqLogin,
+  reqRegister,
+  reqOrderList
 } from '../api'
 
 import {
@@ -24,7 +27,11 @@ import {
   RECEIVE_HOME_FLASHSHOP,
   RECEIVE_PRODUCT_INFO,
   RECEIVE_SEARCH_INFO,
-  RECEIVE_CART_LIST
+  RECEIVE_CART_LIST,
+  RECEIVE_LOGIN,
+  RECEIVE_REGISTER,
+  USER_LOGOUT,
+  RECEIVE_ORDERLIST
 } from './mutation-type'
 
 export default {
@@ -123,6 +130,35 @@ export default {
       cb(result.msg);
     }
   },
+
+  async getLogin({commit},{username,password,cb}) {
+    const result = await reqLogin({username,password});
+    if (!result.code) {
+      commit(RECEIVE_LOGIN, result.data);
+      typeof cb=="function"&&cb();
+    }
+  },
+
+  async getRegister({commit},{phone,code,cb}) {
+    const result = await reqRegister({phone,code});
+    if (!result.code&&typeof cb=="function") {
+      commit(RECEIVE_REGISTER, result.data);
+      cb();
+    }
+  },
+
+  userLogOut({commit},cb) {
+      commit(USER_LOGOUT);
+      typeof cb=="function"&&cb();
+  },
+
+  async getOrderList({commit}) {
+    const result = await reqOrderList();
+    if (!result.code) {
+      commit(RECEIVE_ORDERLIST, result.data);
+    }
+  },
+
 
   
 

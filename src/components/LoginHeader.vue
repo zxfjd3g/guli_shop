@@ -1,16 +1,16 @@
 <template>
   <div id="lh">
-    <!--<div class="user">
+    <div class="user" v-if="userToken">
       <ul class="selector">
         <li>
-          <a href="javascript:;">
+          <router-link to="/personal/self_info">
             个人中心
-          </a>
+          </router-link>
         </li>
         <li>
-          <a href="javascript:;">
+          <router-link to="/personal/order">
             我的订单
-          </a>
+          </router-link>
         </li>
         <li>
           <a href="javascript:;">
@@ -18,25 +18,47 @@
           </a>
         </li>
         <li>
-          <a href="javascript:;">
+          <a href="javascript:;" @click="logOut">
             退出登录
           </a>
         </li>
       </ul>
       <a href="javascript:;" class="username">
-        七月
+        {{userinfo.username}}
         <i class="iconfont">&#xe616;</i>
       </a>
-    </div>-->
-    <ul class="login">
-      <li><a href="">登录</a></li>
-      <li><a href="">注册</a></li>
+    </div>
+    <ul class="login" v-else>
+      <li>
+        <router-link to="/login">
+          登录/注册
+        </router-link>
+      </li>
+      <!--<li>-->
+        <!--<router-link to="/login">-->
+          <!--注册-->
+        <!--</router-link>-->
+      <!--</li>-->
     </ul>
   </div>
 </template>
 
 <script>
-  export default {}
+  import {mapState} from 'vuex';
+  export default {
+    computed:{
+      ...mapState(['userToken','userinfo'])
+    },
+    methods:{
+      logOut(){
+        let {cb}=this;
+        this.$store.dispatch('userLogOut',cb);
+      },
+      cb(){
+        this.$router.replace('/');
+      }
+    }
+  }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>

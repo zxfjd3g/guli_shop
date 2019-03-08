@@ -19,6 +19,7 @@
     justify-content: flex-end;
     align-items: center;
     height: 120px;
+    background-color: #fff;
     margin-top: 20px;
     padding: 30px 0;
     font-size: 12px;

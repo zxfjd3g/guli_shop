@@ -18,3 +18,11 @@ export const RECEIVE_SEARCH_INFO="receive_search_info";
 
 export const RECEIVE_CART_LIST="receive_cart_list";
 
+export const RECEIVE_LOGIN="receive_login";
+
+export const RECEIVE_REGISTER="receive_register";
+
+export const USER_LOGOUT="user_logout";
+
+export const RECEIVE_ORDERLIST="receive_orderlist";
+

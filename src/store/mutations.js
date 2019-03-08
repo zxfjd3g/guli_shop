@@ -7,7 +7,11 @@ import {
   RECEIVE_HOME_FLASHSHOP,
   RECEIVE_PRODUCT_INFO,
   RECEIVE_SEARCH_INFO,
-  RECEIVE_CART_LIST
+  RECEIVE_CART_LIST,
+  RECEIVE_LOGIN,
+  RECEIVE_REGISTER,
+  USER_LOGOUT,
+  RECEIVE_ORDERLIST
 } from './mutation-type'
 
 export default {
@@ -37,5 +41,19 @@ export default {
   },
   [RECEIVE_CART_LIST](state, data) {
     state.cartList = data;
+  },
+  [RECEIVE_LOGIN](state, {userinfo,token}) {
+    state.userinfo= userinfo;
+    state.userToken=token;
+  },
+  [RECEIVE_REGISTER](state, {token}) {
+    state.userToken=token;
+  },
+  [USER_LOGOUT](state) {
+    state.userinfo= {};
+    state.userToken="";
+  },
+  [RECEIVE_ORDERLIST](state,data) {
+    state.orderList=data;
   },
 }

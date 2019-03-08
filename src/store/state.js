@@ -6,5 +6,8 @@ export default {
   flashShop:[],
   productInfo: {},
   searchInfo:{},
-  cartList:[]
+  cartList:[],
+  userinfo:{},
+  userToken:"",
+  orderList:[]
 }

@@ -40,7 +40,6 @@
         if(data){
           return data;
         }else{
-          console.log('+++')
           this.$store.dispatch('getHomeCateList',{id:this.homeCates[this.curIndex].id,curIndex:this.curIndex});
         }
       }

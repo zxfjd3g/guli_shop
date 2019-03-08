@@ -1,13 +1,19 @@
 <template>
   <div id="order">
     <div class="ddzxbt">交易订单</div>
-    <OrderCard/>
-    <OrderCard/>
+    <OrderCard v-for="(order,index) in orderList" :key="index" :order="order"/>
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import OrderCard from '../../components/OrderCard.vue'
   export default {
+    computed:{
+      ...mapState(['orderList'])
+    },
+    mounted(){
+      this.$store.dispatch('getOrderList');
+    },
     components: {
       OrderCard
     }
