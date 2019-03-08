@@ -15,7 +15,7 @@
       </ul>
       <div class="fr">
         <LoginHeader/>
-        <div class="shopcart">
+        <div class="shopcart" @click="ToCart">
           <i class="iconfont icon-cart"></i>
           购物车(3)
         </div>
@@ -24,7 +24,13 @@
   </header>
 </template>
 <script>
-  export default {}
+  export default {
+    methods:{
+      ToCart(){
+        this.$router.push('cart');
+      }
+    }
+  }
 </script>
 <style lang="stylus" scoped>
   #header
@@ -70,4 +76,5 @@
           justify-content: center
           align-items: center
           background-color: #ff6700
+          cursor pointer
 </style>

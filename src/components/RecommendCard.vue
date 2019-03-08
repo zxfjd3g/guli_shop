@@ -1,6 +1,6 @@
 <template>
   <li>
-    <a href="javascript:;">
+    <router-link to="/detail/123">
       <div class="info new">
         新品
       </div>
@@ -12,7 +12,7 @@
         <p>发货速度很快！很配小米6！</p>
         <p>来至于mi狼牙的评价</p>
       </div>
-    </a>
+    </router-link>
   </li>
 </template>
 <script>

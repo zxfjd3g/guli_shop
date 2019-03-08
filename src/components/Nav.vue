@@ -1,8 +1,8 @@
 <template>
   <nav id="nav">
     <div class="banner_x center">
-      <a href="javascript:;" class="logo"><h1>小米官网</h1></a>
-      <a href="javascript:;" class="gif"></a>
+      <router-link to="/" class="logo"><h1>小米官网</h1></router-link>
+      <a class="gif"></a>
       <ul class="list">
         <li><a href="javascript:;">秒杀</a></li>
         <li><a href="javascript:;">优惠券</a></li>
@@ -29,7 +29,7 @@
             </li>
           </ul>
         </div>
-        <div class="button iconfont icon-search"></div>
+        <div class="button iconfont icon-search" @click="ToSearch"></div>
       </div>
     </div>
   </nav>
@@ -39,6 +39,11 @@
   export default {
     computed:{
       ...mapState(["hotSearch"])
+    },
+    methods:{
+      ToSearch(){
+        this.$router.push('/search');
+      }
     },
     mounted(){
       this.$store.dispatch('getHotSearch');

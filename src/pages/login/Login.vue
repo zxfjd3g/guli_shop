@@ -2,7 +2,7 @@
   <div id="login">
     <div class="top center">
       <div class="logo center">
-        <a href="./index.html" target="_blank"><img src="/static/image/login/mistore_logo.png" alt=""></a>
+        <router-link to="/"><img src="/static/image/login/mistore_logo.png" alt=""></router-link>
       </div>
     </div>
     <div class="form center">

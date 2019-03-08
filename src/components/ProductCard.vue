@@ -1,12 +1,12 @@
 <template>
   <div class="pc">
     <div class="sub_mingxing">
-      <a href="./xiangqing.html" target="_blank">
+      <router-link to="/detail/123" target="_blank">
         <img :src="product.imgPath[1]" alt="">
-      </a>
+      </router-link>
     </div>
     <div class="pinpai">
-      <a href="./xiangqing.html" target="_blank">{{product.name}}</a>
+      <router-link to="/detail/123" target="_blank">{{product.name}}</router-link>
     </div>
     <div class="youhui">5.16早10点开售</div>
     <div class="jiage">{{product.price}}元</div>
