@@ -26,3 +26,9 @@ export const USER_LOGOUT="user_logout";
 
 export const RECEIVE_ORDERLIST="receive_orderlist";
 
+export const RECEIVE_SEARCH="receive_search";
+
+export const RECEIVE_KEYWORD="receive_keyword";
+
+
+

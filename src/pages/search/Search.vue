@@ -2,7 +2,8 @@
   <div id="search">
     <Nav/>
     <!--分类过滤-->
-    <ClassifySelector :searchProps="searchProps"/>
+    <ClassifySelector :brand="searchInfo.brand" :catelog="searchInfo.catelog" :attrs="searchInfo.attrs" :pageSize="pageSize"
+                      :selectBrand="selectBrand" :selectCateLog="selectCateLog" :selectAttrs="selectAttrs" :setSearchData="setSearchData"/>
 
     <!--排序-->
     <SortSelector/>
@@ -13,7 +14,8 @@
         <ProductCard v-for="product in searchProductDetails" :key="product.id" :product="product"/>
         <div class="clear"></div>
       </div>
-      <Pages/>
+      <Pages :total="searchInfo.total" :setPageNum="setPageNum" :pageNum="pageNum" :pageSize="pageSize"
+              :selectBrand="selectBrand" :selectCateLog="selectCateLog" :selectAttrs="selectAttrs"/>
     </div>
   </div>
 </template>
@@ -25,19 +27,32 @@
   import SortSelector from '../../components/SortSelector.vue'
 
   export default {
-    mounted(){
-      this.$store.dispatch('getSearch');
+    // mounted(){
+    //   this.$store.dispatch('getSearch');
+    // },
+    data(){
+      return {
+        pageNum:1,
+        pageSize:1,
+        selectBrand:[],
+        selectCateLog:[],
+        selectAttrs:[]
+      };
+    },
+    methods:{
+      setPageNum(pageNum){
+        this.pageNum=pageNum*1;
+      },
+      setSearchData(name,value){
+        this[name]=value;
+      }
     },
     computed:{
       ...mapState(["searchInfo"]),
       searchProductDetails(){
-          let productDetails=this.searchInfo.productDetails;
-          return productDetails;
-      },
-      searchProps(){
-          let props=this.searchInfo.props;
-          return props;
-      },
+          let products=this.searchInfo.products;
+          return products;
+      }
     },
     components: {
       Pages,

@@ -27,7 +27,7 @@
   export default {
     methods:{
       ToCart(){
-        this.$router.push('cart');
+        this.$router.push('/cart');
       }
     }
   }

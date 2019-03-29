@@ -1,6 +1,7 @@
 import ajax from './ajax'
 
 const BASE = '/api'
+const NEWBASE = '/newapi'
 
 // Index
 //获取热门搜索词条
@@ -47,7 +48,7 @@ export const reqUserAddress = () => ajax(`${BASE}/order/user_address`);
 
 //Search
 //搜索
-export const reqSearch = () => ajax(`${BASE}/search`);
+export const reqSearch = (data) => ajax(`${NEWBASE}/search`,data);
 
 //User
 //用户信息

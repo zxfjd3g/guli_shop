@@ -5,9 +5,10 @@ export default {
   hotProducts:[],
   flashShop:[],
   productInfo: {},
-  searchInfo:{},
   cartList:[],
   userinfo:{},
   userToken:"",
-  orderList:[]
+  orderList:[],
+  searchInfo:{},
+  keyword:""
 }

@@ -2,13 +2,13 @@
   <div class="pc">
     <div class="sub_mingxing">
       <router-link to="/detail/123" target="_blank">
-        <img :src="product.imgPath[1]" alt="">
+        <img :src="product.pic" alt="">
       </router-link>
     </div>
     <div class="pinpai">
-      <router-link to="/detail/123" target="_blank">{{product.name}}</router-link>
+      <router-link to="/detail/123" target="_blank">{{product.brandName}}</router-link>
     </div>
-    <div class="youhui">5.16早10点开售</div>
+    <div class="youhui">{{product.name}}</div>
     <div class="jiage">{{product.price}}元</div>
   </div>
 </template>
@@ -65,6 +65,8 @@
       font-size: 12px;
       color: rgb(176,176,176);
       text-align: center;
+      overflow hidden;
+      text-overflow ellipsis;
 
     .jiage
       font-size: 14px;

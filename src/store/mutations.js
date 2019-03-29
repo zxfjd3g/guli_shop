@@ -11,7 +11,9 @@ import {
   RECEIVE_LOGIN,
   RECEIVE_REGISTER,
   USER_LOGOUT,
-  RECEIVE_ORDERLIST
+  RECEIVE_ORDERLIST,
+  RECEIVE_SEARCH,
+  RECEIVE_KEYWORD
 } from './mutation-type'
 
 export default {
@@ -36,9 +38,6 @@ export default {
   [RECEIVE_PRODUCT_INFO](state, data) {
     state.productInfo = data;
   },
-  [RECEIVE_SEARCH_INFO](state, data) {
-    state.searchInfo = data;
-  },
   [RECEIVE_CART_LIST](state, data) {
     state.cartList = data;
   },
@@ -55,5 +54,11 @@ export default {
   },
   [RECEIVE_ORDERLIST](state,data) {
     state.orderList=data;
+  },
+  [RECEIVE_SEARCH](state, data) {
+    state.searchInfo = data;
+  },
+  [RECEIVE_KEYWORD](state, keyword) {
+    state.keyword = keyword;
   },
 }

@@ -2,26 +2,18 @@
   <div class="pages">
     <div class="page_wrap">
       <span class="page_span2">
-        <em>共<b>169</b>页&nbsp;&nbsp;到第</em>
+        <em>共<b>{{totalPage}}</b>页&nbsp;&nbsp;到第</em>
         <input type="number" value="1">
         <em>页</em>
         <a href="javascript:;">确定</a>
       </span>
       <span class="page_span1">
-        <a href="javascript:;">
+        <a href="javascript:;" :class="pageNum<=1?'disable':''">
             < 上一页
         </a>
-        <a href="javascript:;">1</a>
-        <a href="javascript:;" style="border: 0;font-size: 20px;color: #999;background: #fff">...</a>
-        <a href="javascript:;">4</a>
-        <a href="javascript:;">5</a>
-        <a href="javascript:;">6</a>
-        <a href="javascript:;" class="active">7</a>
-        <a href="javascript:;">8</a>
-        <a href="javascript:;">9</a>
-        <a href="javascript:;" style="border: 0;font-size: 20px;color: #999;background: #fff">...</a>
-        <a href="javascript:;">169</a>
-        <a href="javascript:;">
+        <a href="javascript:;" v-for="(num,index) in pages" :key="index" :class="num==pageNum?'active':num=='...'?'omit':''"
+          @click="selectPage(num)">{{num}}</a>
+        <a href="javascript:;" :class="pageNum>=totalPage?'disable':''">
             下一页 >
         </a>
       </span>
@@ -30,8 +22,76 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   export default {
-    name: "Pages"
+    props:{
+      pageNum:Number,
+      pageSize:Number,
+      total:Number,
+      setPageNum:Function,
+      selectBrand:Array,
+      selectCateLog:Array,
+      selectAttrs:Array
+    },
+    computed:{
+      ...mapState(["keyword"]),
+      totalPage(){
+        let {total,pageSize}=this;
+        return Math.ceil(total/pageSize);
+      },
+      pages(){
+        let arr=[];
+        if(this.totalPage>10){
+          if(this.pageNum-4>1){
+            arr.push(1);
+            arr.push('...');
+            arr.push(this.pageNum-3);
+            arr.push(this.pageNum-2);
+            arr.push(this.pageNum-1);
+            arr.push(this.pageNum);
+          }else{
+            for(let i=1;i<this.pageNum+1;i++){
+              arr.push(i);
+            }
+          }
+          if(this.pageNum+3<this.totalPage){
+            arr.push(this.pageNum+1);
+            arr.push(this.pageNum+2);
+            arr.push('...');
+            arr.push(this.totalPage);
+          }else{
+            for(let i=this.pageNum+1;i<this.totalPage+1;i++){
+              arr.push(i);
+            }
+          }
+        }else{
+          for(let i=1;i<this.totalPage+1;i++){
+            arr.push(i);
+          }
+        }
+        return arr;
+      }
+    },
+    methods:{
+      selectPage(num){
+        if(num=="..."){
+          return ;
+        }
+          this.setPageNum(num);
+          let {keyword,selectBrand,selectCateLog,selectAttrs,attrsText,order,pageNum,pageSize}=this;
+          let obj={keyword,order,pageNum:num,pageSize};
+          if(selectBrand[0]){
+            obj.brand=selectBrand;
+          }
+          if(selectCateLog[0]){
+            obj.catelog3=selectCateLog;
+          }
+          if(selectAttrs[0]){
+            obj.props=attrsText;
+          }
+          this.$store.dispatch('getSearch',obj);
+      }
+    }
   }
 </script>
 
@@ -51,6 +111,7 @@
           border: 0;
           color:#ee2222;
           background: #fff
+          cursor default
         a
           font-size: 14px;
           display: block;
@@ -62,12 +123,16 @@
           padding: 0 14px;
           margin-right: 5px;
           border: 1px solid #ddd;
-          &:nth-child(1)
+          &.disable
             color: #ccc;
             background: #fff;
-
-
-
+            cursor default
+          &.omit
+            border 0
+            font-size 20px
+            color #999
+            background #fff
+            cursor default
       .page_span2
         float: right;
         em

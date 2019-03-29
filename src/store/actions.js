@@ -7,7 +7,6 @@ import {
   reqHomeFlashShop,
   reqProductInfo,
   reqCartAdd,
-  reqSearch,
   reqCartList,
   reqCartUpdate,
   reqCartDelete,
@@ -15,7 +14,8 @@ import {
   reqCartCheckAll,
   reqLogin,
   reqRegister,
-  reqOrderList
+  reqOrderList,
+  reqSearch
 } from '../api'
 
 import {
@@ -31,7 +31,9 @@ import {
   RECEIVE_LOGIN,
   RECEIVE_REGISTER,
   USER_LOGOUT,
-  RECEIVE_ORDERLIST
+  RECEIVE_ORDERLIST,
+  RECEIVE_SEARCH,
+  RECEIVE_KEYWORD
 } from './mutation-type'
 
 export default {
@@ -86,13 +88,6 @@ export default {
     const result = await reqCartAdd({id,count});
     if (!result.code) {
       typeof cb=="function"&&cb();
-    }
-  },
-
-  async getSearch({commit}) {
-    const result = await reqSearch();
-    if (!result.code) {
-      commit(RECEIVE_SEARCH_INFO, result.data);
     }
   },
 
@@ -157,6 +152,15 @@ export default {
     if (!result.code) {
       commit(RECEIVE_ORDERLIST, result.data);
     }
+  },
+
+  async getSearch({commit},data) {
+    let cb=data.cb;
+    delete data.cb;
+    const result = await reqSearch(data);
+    commit(RECEIVE_KEYWORD, data.keyword);
+    commit(RECEIVE_SEARCH, result);
+    typeof cb=="function"&&cb();
   },
 
 

@@ -31,23 +31,16 @@
         </div>
         <i><img src="/static/image/search/right-@1x.png" alt=""></i>
         <ul class="ipone_one d">
-          <li class="select_item">
+          <li class="select_item" v-for="item in selectList" :key="item.name">
             <a href="javascript:;">
-              <span class="title">分辨率:</span>
-              <span class="select">全高清FHD</span>
-              <span class="iconfont icon-quxiao"></span>
-            </a>
-          </li>
-          <li class="select_item">
-            <a href="javascript:;">
-              <span class="title">CPU核数:</span>
-              <span class="select">八核</span>
-              <span class="iconfont icon-quxiao"></span>
+              <span class="title">{{item.type}}:</span>
+              <span class="select" v-for="name in item.value">{{name}}</span>
+              <span class="iconfont icon-quxiao" @click="resend(item)"></span>
             </a>
           </li>
         </ul>
         <i><img src="/static/image/search/right-@1x.png" alt=""></i>
-        <div class="findword">"手机"</div>
+        <div class="findword">"{{keyword}}"</div>
       </div>
     </div>
     <div class="selector">
@@ -58,41 +51,92 @@
       </div>
       <div class="nav_logo">
         <!--品牌-->
-        <div v-for="classify in searchProps" :class="classify.id==1?'nav_wrap':'pre'">
+        <div class="nav_wrap">
           <div class="sl_key">
-            <span>{{classify.name}}：</span>
+            <span>{{brand.name}}：</span>
           </div>
           <div class="sl_value">
-            <div class="sl_value_logo" v-if="classify.id==1">
+            <div class="sl_value_logo">
               <ul>
-                <li v-for="prop in classify.propVals" :key="prop.id">
+                <li v-for="prop in brand.value" :key="brand.name+prop" @click="setSelectInfo('selectBrand',prop,brand.name)">
                   <a href="javascript:;">
                     <img :src="prop.img" alt="" v-if="prop.img">
-                    <span v-else>{{prop.name}}</span>
+                    <span v-else>{{prop}}</span>
                     <div>
-                      {{prop.name}}
+                      {{prop}}
                     </div>
                   </a>
                 </li>
               </ul>
             </div>
-            <ul class="nomore" v-if="classify.id!=1">
-              <li v-for="prop in classify.propVals" :key="prop.id">
+          </div>
+          <div class="sl_ext">
+            <a href="javascript:;" class="sl_ext_show" v-if="brand.value.length>5">
+              更多
+              <i style='background: url("/static/image/search/search.ele.png")no-repeat 3px 7px'></i>
+              <b style='background: url("/static/image/search/search.ele.png")no-repeat 3px -44px'></b>
+            </a>
+            <a href="javascript:;" v-else></a>
+            <a href="javascript:;" class="moreCheck">
+              多选
+              <i>+</i>
+              <!-- <span>+</span> -->
+            </a>
+          </div>
+        </div>
+        <div class="pre">
+          <div class="sl_key">
+            <span>{{catelog.name}}：</span>
+          </div>
+          <div class="sl_value">
+            <ul class="nomore">
+              <li v-for="prop in catelog.value" :key="catelog+prop" @click="setSelectInfo('selectCatelog',prop,catelog.name)">
                 <input type="checkbox">
-                <a href="javascript:;">{{prop.name}}</a>
+                <a href="javascript:;">{{prop}}</a>
               </li>
             </ul>
-            <div class="select" v-if="classify.id!=1">
+            <div class="select">
               <button class="confirm" disabled>确定</button>
               <button class="cancel">取消</button>
             </div>
           </div>
           <div class="sl_ext">
-            <a href="javascript:;" class="sl_ext_show">
+            <a href="javascript:;" class="sl_ext_show" v-if="catelog.value.length>7">
               更多
               <i style='background: url("/static/image/search/search.ele.png")no-repeat 3px 7px'></i>
               <b style='background: url("/static/image/search/search.ele.png")no-repeat 3px -44px'></b>
             </a>
+            <a href="javascript:;" v-else></a>
+            <a href="javascript:;" class="moreCheck">
+              多选
+              <i>+</i>
+              <!-- <span>+</span> -->
+            </a>
+          </div>
+        </div>
+        <div v-for="classify in attrs" class="pre" :key="classify.name">
+          <div class="sl_key">
+            <span>{{classify.name}}：</span>
+          </div>
+          <div class="sl_value">
+            <ul class="nomore">
+              <li v-for="prop in classify.value" :key="classify+prop" @click="setSelectInfo('selectAttrs',{productAttributeId:classify.productAttributeId,prop},classify.name)">
+                <input type="checkbox">
+                <a href="javascript:;">{{prop}}</a>
+              </li>
+            </ul>
+            <div class="select">
+              <button class="confirm" disabled>确定</button>
+              <button class="cancel">取消</button>
+            </div>
+          </div>
+          <div class="sl_ext">
+            <a href="javascript:;" class="sl_ext_show" v-if="classify.value.length>6">
+              更多
+              <i style='background: url("/static/image/search/search.ele.png")no-repeat 3px 7px'></i>
+              <b style='background: url("/static/image/search/search.ele.png")no-repeat 3px -44px'></b>
+            </a>
+            <a href="javascript:;" v-else></a>
             <a href="javascript:;" class="moreCheck">
               多选
               <i>+</i>
@@ -251,9 +295,103 @@
   </div>
 </template>
 <script>
+  import {mapState} from 'vuex';
   export default {
+    data(){
+      return {
+        order:"0:desc",
+        selectList:[]
+      };
+    },
     props:{
-      searchProps:Array
+        brand:Object,
+        catelog:Object,
+        attrs:Array,
+        pageSize:Number,
+        selectBrand:Array,
+        selectCateLog:Array,
+        selectAttrs:Array,
+        setSearchData:Function
+    },
+    methods:{
+      setSelectInfo(type,data,name){
+        let myData=this[type];
+        if(!myData.includes(data)&&!this.attrsText.includes(data.prop)){
+          this[type].push(data);
+          let {keyword,selectBrand,selectCateLog,selectAttrs,attrsText,selectList,order,pageNum,pageSize}=this;
+          let obj={keyword,order,pageSize};
+          if(selectBrand[0]){
+            obj.brand=selectBrand;
+          }
+          if(selectCateLog[0]){
+            obj.catelog3=selectCateLog;
+          }
+          if(selectAttrs[0]){
+            obj.props=attrsText;
+          }
+          if(!selectList.includes(myData)&&!selectList.includes(data)){
+            if(typeof data=="object"){
+              selectList.push({type:name,value:data.prop});
+            }else{
+              selectList.push({type:name,value:data});
+            }
+          }
+          this.$store.dispatch('getSearch',obj);
+        }
+      },
+      resend(curObj){
+        this.selectList=this.selectList.filter((item)=>{
+          return item!=curObj;
+        });
+        let newData1=this.selectBrand.filter((item)=>{
+          return item!=curObj.value;
+        });
+        this.setSearchData('selectBrand',newData1);
+        let newData2=this.selectCateLog.filter((item)=>{
+          return item!=curObj.value;
+        });
+        this.setSearchData('selectCateLog',newData2);
+        let newData3=this.selectAttrs.filter((item)=>{
+          return item.prop!=curObj.value;
+        });
+        this.setSearchData('selectAttrs',newData3);
+        this.$nextTick(()=>{
+          let {keyword,selectBrand,selectCateLog,selectAttrs,attrsText,selectList,order,pageNum,pageSize}=this;
+          let obj={keyword,order,pageSize};
+          if(this.selectBrand[0]){
+            obj.brand=selectBrand;
+          }
+          if(selectCateLog[0]){
+            obj.catelog3=selectCateLog;
+          }
+          if(selectAttrs[0]){
+            obj.props=attrsText;
+          }
+          this.$store.dispatch('getSearch',obj);
+        });
+        
+      }
+    },
+    computed:{
+      ...mapState(["keyword"]),
+      searchProps(){
+        if(this.searchInfo){
+          let list = Object.keys(this.searchInfo);
+          return list;
+        }
+        return [];
+      },
+      attrsText(){
+        let {selectAttrs} = this;
+        let str="";
+        selectAttrs.forEach((item,index)=>{
+          if(index){
+            str+="props=";
+          }
+          str+=`${item.productAttributeId}:${item.prop}`;
+        })
+        return str;
+      }
     }
   }
 </script>

@@ -16,7 +16,7 @@
       </ul>
       <div class="fr">
         <div class="search">
-          <input class="text" type="text">
+          <input class="text" type="text" v-model="keyword">
           <div class="search_hot">
             <a href="javascript:;" v-for="item in hotSearch" :key="item.id">{{item.name}}</a>
           </div>
@@ -29,7 +29,7 @@
             </li>
           </ul>
         </div>
-        <div class="button iconfont icon-search" @click="ToSearch"></div>
+        <div class="button iconfont icon-search1" @click="ToSearch"></div>
       </div>
     </div>
   </nav>
@@ -37,12 +37,19 @@
 <script>
   import {mapState} from 'vuex';
   export default {
+    data(){
+      return {
+        keyword:""
+      }
+    },
     computed:{
       ...mapState(["hotSearch"])
     },
     methods:{
       ToSearch(){
-        this.$router.push('/search');
+        this.$store.dispatch('getSearch',{keyword:this.keyword,pageSize:1,cb:()=>{
+          this.$router.push('/search');
+        }})
       }
     },
     mounted(){
