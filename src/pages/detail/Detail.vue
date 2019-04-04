@@ -302,8 +302,15 @@
               font-size 18px
               color #000
               padding 0 10px
+              height:58px
+              img 
+                display block
+                float left
+                // width 100%
+                height 58px
               span
-                display inline-block
+                display block
+                float left
                 margin-right 10px
               .yuandian
                 display inline-block

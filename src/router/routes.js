@@ -70,7 +70,7 @@ export default [
   },
 
   {
-    path: '/add_success',
+    path: '/addsuccess',
     component: AddSuccess
   },
 

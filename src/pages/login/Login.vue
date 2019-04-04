@@ -2,7 +2,7 @@
   <div id="login">
     <div class="top center">
       <div class="logo center">
-        <router-link to="/"><img src="/static/image/login/mistore_logo.png" alt=""></router-link>
+        <router-link to="/"><img src="/static/image/login/logo.png" alt=""></router-link>
       </div>
     </div>
     <div class="form center">
@@ -96,6 +96,13 @@
       .logo
         width  1130px
         height  100px
+        overflow hidden
+        a
+          display block
+          margin-top 23px
+          img 
+            display block
+            width 200px
     .form
       width  1130px
       height  588px

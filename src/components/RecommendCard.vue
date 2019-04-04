@@ -1,13 +1,13 @@
 <template>
   <li>
     <router-link to="/detail/123">
-      <div class="info new">
+      <div class="info" :class="newGood?'new':''">
         新品
       </div>
-      <img src="/static/image/recommend/peijian2.jpg" alt="">
-      <p class="name">小米6 硅胶保护套</p>
-      <p class="price">49元</p>
-      <p class="counter">372人评价</p>
+      <img :src="src" alt="">
+      <p class="name">{{name}}</p>
+      <p class="price">{{price}}元</p>
+      <p class="counter">{{counter}}人评价</p>
       <div class="comment">
         <p>发货速度很快！很配小米6！</p>
         <p>来至于mi狼牙的评价</p>
@@ -17,7 +17,13 @@
 </template>
 <script>
   export default {
-
+    props:{
+      newGood:String,
+      src:String,
+      price:String,
+      name:String,
+      counter:String
+    }
   }
 </script>
 

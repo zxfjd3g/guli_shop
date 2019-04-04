@@ -1,7 +1,7 @@
 <template>
   <div id="settlement">
     <div class="top-1">
-      <img src="/static/image/buy/logo_top.png" class="img1"/><span>结算页</span>
+      <img src="/static/image/buy/logo2.png" class="img1"/><span>结算页</span>
       <!--右侧绿色-->
       <img src="/static/image/buy/08.png" class="img2"/>
     </div>

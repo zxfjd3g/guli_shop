@@ -3,7 +3,7 @@
     <div class="regist_center">
       <div class="regist_top">
         <div class="left fl">会员注册</div>
-        <div class="right fr"><a href="./index.html" target="_self">小米商城</a></div>
+        <div class="right fr"><a href="./index.html" target="_self">硅谷商城</a></div>
         <div class="clear"></div>
         <div class="xian center"></div>
       </div>

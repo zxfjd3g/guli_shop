@@ -1,8 +1,8 @@
 <template>
   <div id="selfinfo">
     <div class="grzlbt ml40">我的资料</div>
-    <div class="subgrzl ml40"><span>昵称</span><span>啦啦维吉尔</span><span><a href="">编辑</a></span></div>
-    <div class="subgrzl ml40"><span>手机号</span><span>15669097417</span><span><a href="">编辑</a></span></div>
+    <div class="subgrzl ml40"><span>昵称</span><span>zhangsanfeng</span><span><a href="">编辑</a></span></div>
+    <div class="subgrzl ml40"><span>手机号</span><span>156****7417</span><span><a href="">编辑</a></span></div>
     <div class="subgrzl ml40"><span>密码</span><span>************</span><span><a href="">编辑</a></span></div>
     <div class="subgrzl ml40"><span>个性签名</span><span>一支穿云箭，千军万马来相见！</span><span><a href="">编辑</a></span></div>
     <div class="subgrzl ml40"><span>我的爱好</span><span>游戏，音乐，旅游，健身</span><span><a href="">编辑</a></span></div>

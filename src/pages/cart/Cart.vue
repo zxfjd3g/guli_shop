@@ -162,7 +162,8 @@
       width 1226px
       height 100px
       .logo
-        background: url('/static/image/nav/logo_top.png') no-repeat center center;
+        background: url('/static/image/nav/logo2.png') no-repeat center center;
+        background-size:100%;
         width: 50px;
         height: 100px;
 
