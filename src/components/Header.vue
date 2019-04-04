@@ -2,14 +2,14 @@
   <header id="header">
     <div class="center">
       <ul class="fl">
-        <li><a href="javascript:;">小米商城</a></li>
-        <li><a href="javascript:;">MIUI</a></li>
-        <li><a href="javascript:;">米聊</a></li>
+        <li><a href="javascript:;">硅谷商城</a></li>
+        <li><a href="javascript:;">HIUI</a></li>
+        <li><a href="javascript:;">谷聊</a></li>
         <li><a href="javascript:;">游戏</a></li>
         <li><a href="javascript:;">多看阅读</a></li>
         <li><a href="javascript:;">云服务</a></li>
         <li><a href="javascript:;">金融</a></li>
-        <li><a href="javascript:;">小米商城移动版</a></li>
+        <li><a href="javascript:;">硅谷商城移动版</a></li>
         <li><a href="javascript:;">问题反馈</a></li>
         <li><a href="javascript:;">Select Region</a></li>
       </ul>

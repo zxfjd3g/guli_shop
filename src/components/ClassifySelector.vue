@@ -300,7 +300,8 @@
     data(){
       return {
         order:"0:desc",
-        selectList:[]
+        selectList:[],
+        testList:[]
       };
     },
     props:{
@@ -392,6 +393,16 @@
         })
         return str;
       }
+    },
+    mounted(){
+      setTimeout(()=>{
+        this.testList.push([123,234]);
+        this.testList.push([123123,312312]);
+      console.log('2',this.testList);
+      console.log('3',this.testList[1]);
+      },0)
+      console.log('0',this.testList);
+      console.log('1',this.testList[1]);
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div id="flash">
-    <h2>小米闪购</h2>
+    <h2>硅谷闪购</h2>
     <ul v-if="flashShop.products">
       <li class="time">
         <a href="javascript:;">

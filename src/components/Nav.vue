@@ -1,18 +1,18 @@
 <template>
   <nav id="nav">
     <div class="banner_x center">
-      <router-link to="/" class="logo"><h1>小米官网</h1></router-link>
+      <router-link to="/" class="logo"><h1>硅谷官网</h1></router-link>
       <a class="gif"></a>
       <ul class="list">
         <li><a href="javascript:;">秒杀</a></li>
         <li><a href="javascript:;">优惠券</a></li>
         <li><a href="javascript:;">闪购</a></li>
         <li><a href="javascript:;">拍卖</a></li>
-        <li><a href="javascript:;">小米服饰</a></li>
-        <li><a href="javascript:;">小米超市</a></li>
+        <li><a href="javascript:;">硅谷服饰</a></li>
+        <li><a href="javascript:;">硅谷超市</a></li>
         <li><a href="javascript:;">生鲜</a></li>
         <li><a href="javascript:;">全球购</a></li>
-        <li><a href="javascript:;">京东金融</a></li>
+        <li><a href="javascript:;">硅谷金融</a></li>
       </ul>
       <div class="fr">
         <div class="search">
@@ -24,7 +24,7 @@
             <li v-for="item in hotSearch" :key="item.id">
               <a href="javascript:;">
                 <span>{{item.name}}</span>
-                <span class="result">约有6件</span>
+                <span class="result">约有1件</span>
               </a>
             </li>
           </ul>
@@ -73,7 +73,8 @@
       .logo
         width: 50px
         text-indent: -10000px
-        background: url("/static/image/nav/logo_top.png") no-repeat
+        // background: url("/static/image/nav/logo_top.png") no-repeat
+        background: url("/static/image/nav/logo2.png") no-repeat
         background-size: 100%
         background-position: center
 
@@ -169,6 +170,7 @@
                 width 100%
                 height 100%
                 font-size 12px
+                line-height 20px
                 .result
                   float: right
                   color: #b0b0b0

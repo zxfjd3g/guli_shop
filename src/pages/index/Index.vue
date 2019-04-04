@@ -19,6 +19,7 @@
   import HotProducts from '../../components/HotProducts.vue'
   import FlashShop from '../../components/FlashShop.vue'
   import Recommend from '../../components/Recommend.vue'
+  import Nav from '../../components/Nav.vue'
 
   export default {
     components: {
@@ -27,6 +28,7 @@
       HotProducts,
       FlashShop,
       Recommend,
+      Nav
     },
   }
 </script>
