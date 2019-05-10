@@ -3,9 +3,9 @@
     <div class="sub_content fl ">
       <input type="checkbox" v-model="isBuy" class="quanxuan" @click="checkBuy"/>
     </div>
-    <div class="sub_content fl"><img :src="product.imgPath[0]"></div>
-    <div class="sub_content fl ft20">{{product.name}}</div>
-    <div class="sub_content fl ">{{product.price}}元</div>
+    <div class="sub_content fl"><img :src="good.productPic"></div>
+    <div class="sub_content fl ft20">{{good.productName}}</div>
+    <div class="sub_content fl ">{{good.price}}元</div>
     <div class="sub_content fl">
       <input class="shuliang" type="number" v-model="count"  @mouseout="updateGood" step="1" min="1">
     </div>
@@ -19,8 +19,8 @@
   export default {
     data() {
       return {
-        count: this.good.count,
-        isBuy: false
+        count: this.good.num,
+        isBuy: this.good.checked
       };
     },
     props:{
@@ -30,19 +30,19 @@
       removeGood: Function
     },
     computed:{
-      product(){
-        let product=this.good.product;
-        return product;
-      },
+      // product(){
+      //   let product=this.good;
+      //   return product;
+      // },
       totalPrice() {
-        return this.good.count * this.product.price;
+        return this.good.num * this.good.price;
       },
     },
     methods: {
       updateGood() {
         const count = this.count * 1;
-        this.good.count = count;
-        this.$store.dispatch('getCartUpdate',{id:this.product.id,count,cb:this.cb})
+        this.good.num = count;
+        this.$store.dispatch('getCartUpdate',{id:this.good.productSkuId,count,cb:this.cb})
       },
       remove() {
         const {good, removeGood} = this;
@@ -91,6 +91,7 @@
       &:nth-of-type(3)
         margin-left: 55px;
         width: 330px;
+        overflow hidden
 
       &:nth-of-type(4)
         margin-left: 55px;
@@ -105,6 +106,8 @@
       &:nth-of-type(7)
         margin-left: 145px;
         font-size: 25px;
+        a
+          cursor pointer
 
       .shuliang
         width: 70px;

@@ -1,12 +1,12 @@
 <template>
   <div class="pc">
     <div class="sub_mingxing">
-      <router-link to="/detail/123" target="_blank">
+      <router-link :to="'/detail/'+product.id">
         <img :src="product.pic" alt="">
       </router-link>
     </div>
     <div class="pinpai">
-      <router-link to="/detail/123" target="_blank">{{product.brandName}}</router-link>
+      <router-link :to="'/detail/'+product.id">{{product.brandName}}</router-link>
     </div>
     <div class="youhui">{{product.name}}</div>
     <div class="jiage">{{product.price}}元</div>

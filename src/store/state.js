@@ -8,6 +8,8 @@ export default {
   cartList:[],
   userinfo:{},
   userToken:"",
+  token:"",
+  cartKey:"",
   orderList:[],
   searchInfo:{},
   keyword:""

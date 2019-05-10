@@ -7,7 +7,9 @@ import {
   RECEIVE_HOME_FLASHSHOP,
   RECEIVE_PRODUCT_INFO,
   RECEIVE_SEARCH_INFO,
+  RECEIVE_CART_ADD,
   RECEIVE_CART_LIST,
+  RECEIVE_USER_TOKEN,
   RECEIVE_LOGIN,
   RECEIVE_REGISTER,
   USER_LOGOUT,
@@ -38,15 +40,23 @@ export default {
   [RECEIVE_PRODUCT_INFO](state, data) {
     state.productInfo = data;
   },
+  [RECEIVE_CART_ADD](state, data) {
+    if(data){
+      state.cartKey = data.cartKey;
+    }
+  },
   [RECEIVE_CART_LIST](state, data) {
     state.cartList = data;
   },
+  [RECEIVE_USER_TOKEN](state, userToken) {
+    state.userToken=userToken;
+  },
   [RECEIVE_LOGIN](state, {userinfo,token}) {
     state.userinfo= userinfo;
-    state.userToken=token;
+    state.token=token;
   },
   [RECEIVE_REGISTER](state, {token}) {
-    state.userToken=token;
+    state.token=token;
   },
   [USER_LOGOUT](state) {
     state.userinfo= {};

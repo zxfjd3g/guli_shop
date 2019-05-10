@@ -48,7 +48,11 @@
     methods:{
       ToSearch(){
         this.$store.dispatch('getSearch',{keyword:this.keyword,pageSize:1,cb:()=>{
-          this.$router.push('/search');
+          if(this.$router.history.current.fullPath=="/search"){
+            location.reload();
+          }else{
+            this.$router.push('/search');
+          }
         }})
       }
     },

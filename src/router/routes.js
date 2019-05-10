@@ -16,11 +16,15 @@ import Settlement from '../pages/settlement/Settlement.vue'
 export default [
   {
     path: '/',
-    component: Index
+    component: Index,
+    props:(route)=>{
+      return {userToken:route.query.token}
+    }
   },
   {
     path: '/detail/:id',
     component: Detail,
+    props: (route) => {return route.params}
   },
   {
     path: '/cart',
@@ -71,11 +75,14 @@ export default [
 
   {
     path: '/addsuccess',
-    component: AddSuccess
+    component: AddSuccess,
+    props:(route)=>{
+      return {imgSrc:route.query.imgPath,name:route.query.productName,group:route.query.curGroup,price:route.query.curPrice}
+    }
   },
 
   {
     path: '/settlement',
     component: Settlement
-  },
+  }
 ]

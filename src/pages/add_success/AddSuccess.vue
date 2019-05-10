@@ -9,13 +9,13 @@
               <h3 class="ftx-02">商品已成功加入购物车</h3></div>
             <div class="p-item">
               <div class="p-img">
-                <a href="javascript:;" target="_blank"><img src="/static/image/addsuccess/shang1.jpg"></a>
+                <a href="javascript:;" target="_blank"><img :src="imgSrc"></a>
               </div>
               <div class="p-info">
                 <div class="p-name">
-                  <a href="javascript:;" title="TCL 55A950C 55英寸32核人工智能 HDR曲面超薄4K电视金属机身（枪色）">TCL 55A950C 55英寸32核人工智能 HDR曲面超薄4K电视金属机身（枪色）</a>
+                  <a href="javascript:;" title="TCL 55A950C 55英寸32核人工智能 HDR曲面超薄4K电视金属机身（枪色）">{{name}}</a>
                 </div>
-                <div class="p-extra"><span class="txt" title="55吋 超薄曲面 人工智能">尺码：55吋 超薄曲面 人工智能</span><span class="txt">/  数量：1</span></div>
+                <div class="p-extra"><span class="txt" title="55吋 超薄曲面 人工智能">套餐：{{group}}</span><span class="txt">/  数量：1</span></div>
               </div>
               <div class="clr"></div>
             </div>
@@ -26,8 +26,8 @@
             </div>
             <div class="clr"></div>
             <div class="bg_shop">
-              <a class="btn-tobback" href="../商品详情页\shangpinxiangqing.html">查看商品详情</a>
-              <a class="btn-addtocart" href="../购物车\One_JDshop.html" id="GotoShoppingCart"><b></b>去购物车结算</a>
+              <a class="btn-tobback" href="javascript:;" @click="$router.go(-1)">查看商品详情</a>
+              <a class="btn-addtocart" href="javascript:;" id="GotoShoppingCart" @click="$router.replace('/cart')"><b></b>去购物车结算</a>
             </div>
           </div>
         </div>
@@ -37,8 +37,14 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex';
   export default {
-
+    props:["imgSrc","name","group","price"],
+    computed:{
+      ...mapState(['productInfo'])
+    },
+    methods:{
+    }
   }
 </script>
 
@@ -88,8 +94,17 @@
               .p-img
                 float left
                 width 60px
+                height 60px
                 margin-right 10px
                 border 1px solid #e8e8e8
+                a
+                  display block
+                  height 100%
+                  width 100%
+                  img
+                    display block
+                    height 100%
+                    width 100%
               .p-info
                 float left
                 width 520px

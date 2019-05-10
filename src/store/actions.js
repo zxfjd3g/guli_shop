@@ -27,7 +27,9 @@ import {
   RECEIVE_HOME_FLASHSHOP,
   RECEIVE_PRODUCT_INFO,
   RECEIVE_SEARCH_INFO,
+  RECEIVE_CART_ADD,
   RECEIVE_CART_LIST,
+  RECEIVE_USER_TOKEN,
   RECEIVE_LOGIN,
   RECEIVE_REGISTER,
   USER_LOGOUT,
@@ -78,60 +80,61 @@ export default {
 
   async getProductDetail({commit}, {id,cb}) {
     const result = await reqProductInfo(id);
-    if (!result.code) {
-      commit(RECEIVE_PRODUCT_INFO, result.data);
+    commit(RECEIVE_PRODUCT_INFO, result);
+    typeof cb=="function"&&cb();
+  },
+
+  async getCartAdd({commit,state}, {id,count,cb}) {
+    const result = await reqCartAdd({id,count,token:state.userToken,cartKey:state.cartKey});
+    if (result.code) {
+      commit(RECEIVE_CART_ADD, result.data);
       typeof cb=="function"&&cb();
     }
   },
 
-  async getCartAdd({commit}, {id,count,cb}) {
-    const result = await reqCartAdd({id,count});
-    if (!result.code) {
-      typeof cb=="function"&&cb();
-    }
-  },
-
-  async getCartList({commit}) {
-    const result = await reqCartList();
-    if (!result.code) {
+  async getCartList({commit,state}) {
+    const result = await reqCartList({token:state.userToken,cartKey:state.cartKey});
+    if (result.code) {
       commit(RECEIVE_CART_LIST, result.data);
     }
   },
 
-  async getCartUpdate({commit},{id,count,cb}) {
-    const result = await reqCartUpdate({id,count});
-    if (result.code&&typeof cb=="function") {
-      cb(result.msg);
-    }
+  async getCartUpdate({commit,state},{id,count,cb}) {
+    const result = await reqCartUpdate({id,count,token:state.userToken,cartKey:state.cartKey});
+    // if (result.code&&typeof cb=="function") {
+    //   cb("修改数量成功");
+    // }
   },
 
-  async getCartDelete({commit},{id,cb}) {
-    const result = await reqCartDelete({id});
-    if (result.code&&typeof cb=="function") {
-      cb(result.msg);
-    }
+  async getCartDelete({commit,state},{id,cb}) {
+    const result = await reqCartDelete({id,token:state.userToken,cartKey:state.cartKey});
+    // if (result.code&&typeof cb=="function") {
+    //   cb(result.msg);
+    // }
   },
 
-  async getCartCheck({commit},{id,type,cb}) {
-    const result = await reqCartCheck({id,type});
-    if (result.code&&typeof cb=="function") {
-      cb(result.msg);
-    }
+  async getCartCheck({commit,state},{id,type,cb}) {
+    const result = await reqCartCheck({id,type,token:state.userToken,cartKey:state.cartKey});
+    // if (result.code&&typeof cb=="function") {
+    //   cb(result.msg);
+    // }
   },
 
-  async getCartCheckAll({commit},{type,cb}) {
-    const result = await reqCartCheckAll({type});
-    if (result.code&&typeof cb=="function") {
-      cb(result.msg);
-    }
+  async getCartCheckAll({commit,state},{type,cb}) {
+    const result = await reqCartCheckAll({type,token:state.userToken,cartKey:state.cartKey});
+    // if (result.code&&typeof cb=="function") {
+    //   cb(result.msg);
+    // }
   },
 
-  async getLogin({commit},{username,password,cb}) {
-    const result = await reqLogin({username,password});
-    if (!result.code) {
-      commit(RECEIVE_LOGIN, result.data);
-      typeof cb=="function"&&cb();
-    }
+  getLogin({commit}) {
+    const url="http://localhost:8080";
+    window.location.href=`http://2b7gzhsrv5.51http.tech/register/authorization?authType=weibo&url=${url}`;
+    // const result = await reqLogin(url);
+  },
+
+  setUserToken({commit},userToken){
+    commit(RECEIVE_USER_TOKEN,userToken);
   },
 
   async getRegister({commit},{phone,code,cb}) {

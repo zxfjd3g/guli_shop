@@ -16,7 +16,11 @@ export const RECEIVE_PRODUCT_INFO="receive_product_info";
 
 export const RECEIVE_SEARCH_INFO="receive_search_info";
 
+export const RECEIVE_CART_ADD="receive_cart_add";
+
 export const RECEIVE_CART_LIST="receive_cart_list";
+
+export const RECEIVE_USER_TOKEN="receive_user_token";
 
 export const RECEIVE_LOGIN="receive_login";
 

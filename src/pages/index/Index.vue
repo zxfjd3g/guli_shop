@@ -30,6 +30,13 @@
       Recommend,
       Nav
     },
+    props:['userToken'],
+    mounted(){
+      let {userToken}=this;
+      if(userToken){
+        this.$store.dispatch('setUserToken',userToken);
+      }
+    }
   }
 </script>
 

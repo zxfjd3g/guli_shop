@@ -3,7 +3,7 @@
     <Nav/>
     <div class="xiangqing">
       <div class="neirong w">
-        <div class="xiaomi6 fl" v-if="productInfo.baseDetail">{{productInfo.baseDetail.name}}</div>
+        <div class="xiaomi6 fl" v-if="productInfo.product">{{productInfo.product.name}}</div>
         <nav class="fr">
           <li><a href="">概述</a></li>
           <li>|</li>
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="jieshao mt20 w clearfix" v-if="productInfo.baseDetail">
+    <div class="jieshao mt20 w clearfix" v-if="productInfo.product">
       <div class="left fl" style="position: relative;">
         <div class="hiddenbox" @mousemove="handleMove">
         </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="swiper-container swiper-container-horizontal">
           <div class="swiper-wrapper">
-            <div class="swiper-slide" :class="imgPath==img?'active':''" @click="imgPath=img" v-for="(img,index) in productInfo.baseDetail.imgPath.slice(1)" :key="index">
+            <div class="swiper-slide" :class="imgPath[0]==img?'active':''" @click="imgPath=[img]" v-for="(img,index) in imgPath" :key="index">
               <img :src="img" alt="">
             </div>
           </div>
@@ -43,11 +43,11 @@
         </div>
       </div>
       <div class="right fr">
-        <div class="h3 ml20 mt20">{{productInfo.baseDetail.name}}</div>
-        <div class="jianjie mr40 ml20 mt10">变焦双摄，4 轴防抖 / 骁龙835 旗舰处理器，6GB 大内存，最大可选128GB 闪存 / 5.15" 护眼屏 / 四曲面玻璃/陶瓷机身</div>
-        <div class="jiage ml20 mt10">{{productInfo.baseDetail.price}}元</div>
-        <div class="ft20 ml20 mt20">选择版本</div>
-        <div class="xzbb ml20 mt10">
+        <div class="h3 ml20 mt20">{{productInfo.product.name}}</div>
+        <div class="jianjie mr40 ml20 mt10">{{productInfo.product.subTitle}}</div>
+        <div class="jiage ml20 mt10">{{productInfo.product.price}}元</div>
+        <!-- <div class="ft20 ml20 mt20">选择版本</div> -->
+        <!-- <div class="xzbb ml20 mt10">
           <div class="banben fl" :class="curVersion==version?'active':''" @click="curVersion=version" v-for="version in productInfo.props[1].propVals" :key="version.id">
             <a>
               <span>{{version.name}}</span>
@@ -55,24 +55,22 @@
             </a>
           </div>
           <div class="clear"></div>
-        </div>
-        <div class="ft20 ml20 mt20">选择颜色</div>
-        <div class="xzbb ml20 mt10">
+        </div> -->
+        <!-- <div class="ft20 ml20 mt20">选择颜色</div> -->
+        <!-- <div class="xzbb ml20 mt10">
           <div class="banben" :class="curColor==color?'active':''" @click="curColor=color" v-for="color in productInfo.props[0].propVals" :key="color.id">
             <a>
-              <!--<span class="yuandian"></span>-->
               <img :src="color.img" alt="">
               <span class="yanse">{{color.name}}</span>
             </a>
           </div>
           <div class="clear"></div>
-        </div>
+        </div> -->
         <div class="ft20 ml20 mt20">选择套餐</div>
         <div class="xzbb ml20 mt10">
-          <div class="banben" :class="curGroup==group?'active':''" @click="curGroup=group" v-for="group in productInfo.props[2].propVals" :key="group.id">
+          <div class="banben" :class="curGroup==group?'active':''" @click="curGroup=group" v-for="group in productInfo.skuStocks" :key="group.id">
             <a>
-              <!--<span class="yuandian"></span>-->
-              <span class="yanse">{{group.name}}</span>
+              <span class="yanse">{{group.sp1+" "+group.sp2}}</span>
             </a>
           </div>
           <div class="clear"></div>
@@ -80,10 +78,10 @@
         <div class="xqxq mt20 ml20">
           <div class="top1 mt10">
             <div class="left1 fl">{{curText}}</div>
-            <div class="right1 fr">2499.00元</div>
+            <div class="right1 fr">{{curPrice}}元</div>
             <div class="clear"></div>
           </div>
-          <div class="bot mt20 ft20 ftbc">总计：2499元</div>
+          <div class="bot mt20 ft20 ftbc">总计：{{curPrice}}元</div>
         </div>
         <div class="xiadan ml20 mt20">
           <input class="jrgwc" type="button" name="jrgwc" value="立即选购"/>
@@ -102,28 +100,31 @@
   export default {
     data(){
       return {
-        id:123,
         imgPath:'',
         curVersion:{},
         curColor:{},
-        curGroup:{}
+        curGroup:{},
+        curPrice:""
       }
+    },
+    props:{
+      id:String
     },
     computed:{
       ...mapState(['productInfo']),
       curText(){
-        let {curVersion,curColor,curGroup} =this;
-        let text=curVersion.name+' '+curColor.name+' '+curGroup.name;
+        let {curGroup} =this;
+        let text=curGroup.sp1+' '+curGroup.sp2;
+        this.curPrice=curGroup.price;
         return text;
       }
     },
     watch:{
       productInfo(value){
-        console.log('123');
-        this.imgPath=this.productInfo.baseDetail.imgPath[1];
-        this.curColor=this.productInfo.props[0].propVals[0];
-        this.curVersion=this.productInfo.props[1].propVals[0];
-        this.curGroup=this.productInfo.props[2].propVals[0];
+        this.imgPath=[value.product.pic];
+        // this.curColor=this.productInfo.props[0].propVals[0];
+        // this.curVersion=this.productInfo.props[1].propVals[0];
+        this.curGroup=this.productInfo.skuStocks[0];
       }
     },
     methods:{
@@ -142,13 +143,16 @@
         bigImg.style.transform=`translate(${-left*scale}px,${-top*scale}px)`;
       },
       addGood(){
-        this.$store.dispatch('getCartAdd',{id:this.id,count:1,cb:()=>{
+        let {imgPath,productInfo,curGroup,curPrice,id}=this;
+        this.$store.dispatch('getCartAdd',{id,count:1,cb:()=>{
           //跳转到addSuccess页面
-            alert('商品添加成功,跳转到addSuccess页面')
+            alert('商品添加成功,跳转到addSuccess页面');
+            this.$router.push('/addsuccess?imgPath='+imgPath+"&productName="+productInfo.product.name+"&curGroup="+curGroup.sp1+' '+curGroup.sp2+"&curPrice="+curPrice);
           }});
       }
     },
     mounted() {
+      console.log(this.id)
       this.$store.dispatch('getProductDetail',{
         id:this.id,
         cb:()=>{
@@ -186,6 +190,7 @@
           line-height 58px
           font-size 22px
           font-weight bold
+          overflow hidden
         nav
           display inline-block
           width 410px

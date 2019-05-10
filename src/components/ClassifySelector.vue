@@ -29,8 +29,8 @@
             <a href="javascript:;">游戏手机</a>
           </div>
         </div>
-        <i><img src="/static/image/search/right-@1x.png" alt=""></i>
-        <ul class="ipone_one d">
+        <i v-show="selectList.length"><img src="/static/image/search/right-@1x.png" alt=""></i>
+        <ul class="ipone_one d" v-show="selectList.length">
           <li class="select_item" v-for="item in selectList" :key="item.name">
             <a href="javascript:;">
               <span class="title">{{item.type}}:</span>
@@ -39,8 +39,8 @@
             </a>
           </li>
         </ul>
-        <i><img src="/static/image/search/right-@1x.png" alt=""></i>
-        <div class="findword">"{{keyword}}"</div>
+        <i v-show="keyword"><img src="/static/image/search/right-@1x.png" alt=""></i>
+        <div class="findword" v-show="keyword">"{{keyword}}"</div>
       </div>
     </div>
     <div class="selector">
@@ -300,8 +300,7 @@
     data(){
       return {
         order:"0:desc",
-        selectList:[],
-        testList:[]
+        selectList:[]
       };
     },
     props:{
@@ -393,16 +392,6 @@
         })
         return str;
       }
-    },
-    mounted(){
-      setTimeout(()=>{
-        this.testList.push([123,234]);
-        this.testList.push([123123,312312]);
-      console.log('2',this.testList);
-      console.log('3',this.testList[1]);
-      },0)
-      console.log('0',this.testList);
-      console.log('1',this.testList[1]);
     }
   }
 </script>

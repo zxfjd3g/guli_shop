@@ -27,11 +27,11 @@
         </div>
         <CartItem v-for="good in goods"
                   :good="good"
-                  :key="good.id"
+                  :key="good.productSkuId"
                   :addBuy="addBuy"
                   :removeBuy="removeBuy"
                   :removeGood="removeGood"
-                  :ref="good.product.id"
+                  :ref="good.productSkuId"
         />
       </div>
       <div class="jiesuandan mt20 center">
@@ -69,17 +69,17 @@
       ...mapState(["cartList"]),
       sum() {
         return this.goods.reduce((pre, good) => {
-          return pre + good.count;
+          return pre + good.num;
         }, 0);
       },
       selectCount() {
         return this.buyGoods.reduce((pre, good) => {
-          return pre + good.count;
+          return pre + good.num;
         }, 0);
       },
       totalPrice() {
         return this.buyGoods.reduce((pre, good) => {
-          return pre + good.count * good.product.price;
+          return pre + good.num * good.price;
         }, 0);
       }
     },
@@ -89,23 +89,23 @@
         if (this.buyGoods.length == this.goods.length) {
           this.checkAll = true;
         }
-        this.$store.dispatch('getCartCheck',{id:good.product.id,type:1,cb:this.cb});
+        this.$store.dispatch('getCartCheck',{id:good.productSkuId,type:1,cb:this.cb});
       },
       removeBuy(good) {
         this.buyGoods = this.buyGoods.filter((item, index) => {
-          return item.id !== good.id;
+          return item.productSkuId !== good.productSkuId;
         });
         this.checkAll = false;
-        this.$store.dispatch('getCartCheck',{id:good.product.id,type:0,cb:this.cb});
+        this.$store.dispatch('getCartCheck',{id:good.productSkuId,type:0,cb:this.cb});
       },
       removeGood(good) {
         let shopgood = {};
         this.removeBuy(good);
         this.goods = this.goods.filter((item, index) => {
-          return item.id !== good.id;
+          return item.productSkuId !== good.productSkuId;
         });
         this.buyGoods = this.buyGoods.filter((item, index) => {
-          return item.id !== good.id;
+          return item.productSkuId !== good.productSkuId;
         });
         if (this.buyGoods.length == this.goods.length) {
           this.checkAll = true;
@@ -113,9 +113,9 @@
           this.checkAll = false;
         }
         this.goods.forEach((good, index) => {
-          shopgood[good.id] = good;
+          shopgood[good.productSkuId] = good;
         })
-        this.$store.dispatch('getCartDelete',{id:good.product.id,cb:this.cb});
+        this.$store.dispatch('getCartDelete',{id:good.productSkuId,cb:this.cb});
       },
       isCheckAll() {
         this.checkAll = !this.checkAll;
@@ -145,7 +145,7 @@
         }
       },
       cartList(){
-        this.goods=this.cartList;
+        this.goods=this.cartList.items;
       }
     },
     mounted(){
@@ -257,7 +257,7 @@
       background: #ff6700;
     .gwcxqbj
       width: 100%;
-      height: 400px;
+      // height: 400px;
       background: rgb(245, 245, 245);
       padding-bottom: 20px;
       .gwcxd

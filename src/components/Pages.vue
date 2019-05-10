@@ -8,12 +8,12 @@
         <a href="javascript:;">确定</a>
       </span>
       <span class="page_span1">
-        <a href="javascript:;" :class="pageNum<=1?'disable':''">
+        <a href="javascript:;" :class="pageNum<=1?'disable':''" @click="pageNum>1?selectPage(pageNum-1):null">
             < 上一页
         </a>
         <a href="javascript:;" v-for="(num,index) in pages" :key="index" :class="num==pageNum?'active':num=='...'?'omit':''"
           @click="selectPage(num)">{{num}}</a>
-        <a href="javascript:;" :class="pageNum>=totalPage?'disable':''">
+        <a href="javascript:;" :class="pageNum>=totalPage?'disable':''" @click="pageNum<totalPage?selectPage(pageNum+1):null">
             下一页 >
         </a>
       </span>

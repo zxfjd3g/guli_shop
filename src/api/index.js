@@ -2,6 +2,7 @@ import ajax from './ajax'
 
 const BASE = '/api'
 const NEWBASE = '/newapi'
+const LOGINBASE = '/loginapi'
 
 // Index
 //获取热门搜索词条
@@ -22,29 +23,29 @@ export const reqHomeRecommend = () => ajax(`${BASE}/index/miaosha`);
 
 //Deatil
 //获取商品详细信息
-export const reqProductInfo = (id) => ajax(`${BASE}/product/${id}`);
+export const reqProductInfo = (id) => ajax(`${NEWBASE}/item/${id}.html`);
 
 //Cart
 //将商品添加到购物车
-export const reqCartAdd = ({id,count}) => ajax(`${BASE}/cart/add`,{id,count});
+export const reqCartAdd = ({id,count,token,cartKey}) => ajax(`${NEWBASE}/cart/add`,{skuId:id*1,num:count,token,cartKey},"POSTFORM");
 //获取购物车商品列表
-export const reqCartList = () => ajax(`${BASE}/cart/list`);
+export const reqCartList = ({token,cartKey}) => ajax(`${NEWBASE}/cart/list`,{token,cartKey});
 //更新商品
-export const reqCartUpdate = ({id,count}) => ajax(`${BASE}/cart/update`,{id,count});
+export const reqCartUpdate = ({id,count,token,cartKey}) => ajax(`${NEWBASE}/cart/update`,{skuId:id,num:count,token,cartKey},"POSTFORM");
 //删除商品
-export const reqCartDelete = ({id}) => ajax(`${BASE}/cart/delete`,{id});
+export const reqCartDelete = ({id,token,cartKey}) => ajax(`${NEWBASE}/cart/delete`,{skuId:id,token,cartKey},"POSTFORM");
 //选中/取消选中商品
-export const reqCartCheck = ({id,type}) => ajax(`${BASE}/cart/check`,{id,type});
+export const reqCartCheck = ({id,type,token,cartKey}) => ajax(`${NEWBASE}/cart/check`,{skuId:id,flag:type,token,cartKey},"POSTFORM");
 //全选/取消全选商品
-export const reqCartCheckAll = ({type}) => ajax(`${BASE}/cart/checkAll`,{type});
+export const reqCartCheckAll = ({type,token,cartKey}) => ajax(`${NEWBASE}/cart/checkAll`,{flag:type,token,cartKey},"POSTFORM");
 
 //Order
 //获取订单列表
-export const reqOrderList = () => ajax(`${BASE}/order/list`);
+export const reqOrderList = () => ajax(`${NEWBASE}/order/list`);
 //订单搜索
-export const reqOrderSearch = (keyword) => ajax(`${BASE}/order/search`,{keyword});
+export const reqOrderSearch = (keyword) => ajax(`${NEWBASE}/order/search`,{keyword});
 //订单搜索
-export const reqUserAddress = () => ajax(`${BASE}/order/user_address`);
+export const reqUserAddress = () => ajax(`${NEWBASE}/order/user_address`);
 
 //Search
 //搜索
@@ -52,12 +53,12 @@ export const reqSearch = (data) => ajax(`${NEWBASE}/search`,data);
 
 //User
 //用户信息
-export const reqUserInfo = () => ajax(`${BASE}/user/info`,{},'POST');
+export const reqUserInfo = () => ajax(`${NEWBASE}/user/info`,{},'POST');
 //登陆
-export const reqLogin = ({username,password}) => ajax(`${BASE}/user/login`,{username,password},'POST');
+export const reqLogin = (url) => ajax(`${LOGINBASE}/register/authorization?authType=weibo&url=${url}`);
 //注册
-export const reqRegister = ({phone,code}) => ajax(`${BASE}/user/regist`,{phone,code},'POST');
+export const reqRegister = ({phone,code}) => ajax(`${NEWBASE}/user/regist`,{phone,code},'POST');
 
 //Pay
 //支付
-export const reqPayOrder = ({orderId,token,type,total}) => ajax(`${BASE}/pay/order`,{orderId,token,type,total},'POST');
+export const reqPayOrder = ({orderId,token,type,total}) => ajax(`${NEWBASE}/pay/order`,{orderId,token,type,total},'POST');
