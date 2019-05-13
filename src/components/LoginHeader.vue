@@ -24,7 +24,7 @@
         </li>
       </ul>
       <a href="javascript:;" class="username">
-        {{userinfo.username}}
+        {{userInfo.nickname}}
         <i class="iconfont">&#xe616;</i>
       </a>
     </div>
@@ -47,7 +47,7 @@
   import {mapState} from 'vuex';
   export default {
     computed:{
-      ...mapState(['userToken','userinfo'])
+      ...mapState(['userToken','userInfo'])
     },
     methods:{
       logOut(){
@@ -56,6 +56,11 @@
       },
       cb(){
         this.$router.replace('/');
+      }
+    },
+    watch:{
+      userToken(){
+        this.$store.dispatch('getUserInfo');
       }
     }
   }

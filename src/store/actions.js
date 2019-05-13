@@ -13,8 +13,10 @@ import {
   reqCartCheck,
   reqCartCheckAll,
   reqLogin,
+  reqUserInfo,
   reqRegister,
   reqOrderList,
+  reqBuyOrderList,
   reqSearch
 } from '../api'
 
@@ -30,10 +32,12 @@ import {
   RECEIVE_CART_ADD,
   RECEIVE_CART_LIST,
   RECEIVE_USER_TOKEN,
+  RECEIVE_USER_INFO,
   RECEIVE_LOGIN,
   RECEIVE_REGISTER,
   USER_LOGOUT,
   RECEIVE_ORDERLIST,
+  RECEIVE_BUY_ORDERLIST,
   RECEIVE_SEARCH,
   RECEIVE_KEYWORD
 } from './mutation-type'
@@ -137,6 +141,13 @@ export default {
     commit(RECEIVE_USER_TOKEN,userToken);
   },
 
+  async getUserInfo({commit,state}) {
+    const result = await reqUserInfo(state.userToken);
+    if (result.id) {
+      commit(RECEIVE_USER_INFO, result);
+    }
+  },
+
   async getRegister({commit},{phone,code,cb}) {
     const result = await reqRegister({phone,code});
     if (!result.code&&typeof cb=="function") {
@@ -148,6 +159,14 @@ export default {
   userLogOut({commit},cb) {
       commit(USER_LOGOUT);
       typeof cb=="function"&&cb();
+  },
+
+  async getBuyOrderList({commit,state},cb) {
+    const result = await reqBuyOrderList(state.userToken);
+    if (result.code) {
+      commit(RECEIVE_BUY_ORDERLIST, result.data);
+      typeof cb=="function"&&cb();
+    }
   },
 
   async getOrderList({commit}) {

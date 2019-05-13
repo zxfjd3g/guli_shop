@@ -6,6 +6,7 @@ export default function ajax(url,data={},method="GET"){
       let promise;
         if(method=="GET"){
             if(JSON.stringify(data) != "{}"){
+                console.log(data,url)
               promise = axios.get(url,{
                 params:data,
                 paramsSerializer: params => {

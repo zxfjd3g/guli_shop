@@ -10,9 +10,11 @@ import {
   RECEIVE_CART_ADD,
   RECEIVE_CART_LIST,
   RECEIVE_USER_TOKEN,
+  RECEIVE_USER_INFO,
   RECEIVE_LOGIN,
   RECEIVE_REGISTER,
   USER_LOGOUT,
+  RECEIVE_BUY_ORDERLIST,
   RECEIVE_ORDERLIST,
   RECEIVE_SEARCH,
   RECEIVE_KEYWORD
@@ -51,6 +53,9 @@ export default {
   [RECEIVE_USER_TOKEN](state, userToken) {
     state.userToken=userToken;
   },
+  [RECEIVE_USER_INFO](state, userInfo) {
+    state.userInfo=userInfo;
+  },
   [RECEIVE_LOGIN](state, {userinfo,token}) {
     state.userinfo= userinfo;
     state.token=token;
@@ -61,6 +66,10 @@ export default {
   [USER_LOGOUT](state) {
     state.userinfo= {};
     state.userToken="";
+  },
+  [RECEIVE_BUY_ORDERLIST](state,data) {
+    state.buyOrderList=data.cartItem;
+    state.tradeToken=data.tradeToken;
   },
   [RECEIVE_ORDERLIST](state,data) {
     state.orderList=data;

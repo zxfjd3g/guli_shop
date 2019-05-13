@@ -6,10 +6,12 @@ export default {
   flashShop:[],
   productInfo: {},
   cartList:[],
-  userinfo:{},
+  userInfo:{},
   userToken:"",
   token:"",
   cartKey:"",
+  tradeToken:"",
+  buyOrderList:[],
   orderList:[],
   searchInfo:{},
   keyword:""

@@ -22,11 +22,15 @@ export const RECEIVE_CART_LIST="receive_cart_list";
 
 export const RECEIVE_USER_TOKEN="receive_user_token";
 
+export const RECEIVE_USER_INFO="receive_user_info";
+
 export const RECEIVE_LOGIN="receive_login";
 
 export const RECEIVE_REGISTER="receive_register";
 
 export const USER_LOGOUT="user_logout";
+
+export const RECEIVE_BUY_ORDERLIST="receive_buy_orderlist";
 
 export const RECEIVE_ORDERLIST="receive_orderlist";
 

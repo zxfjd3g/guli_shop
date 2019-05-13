@@ -12,6 +12,7 @@ import Discount from '../pages/personal/Discount.vue'
 import Address from '../pages/personal/Address.vue'
 import AddSuccess from '../pages/add_success/AddSuccess.vue'
 import Settlement from '../pages/settlement/Settlement.vue'
+import Buy from '../pages/buy/Buy.vue'
 
 export default [
   {
@@ -76,13 +77,15 @@ export default [
   {
     path: '/addsuccess',
     component: AddSuccess,
-    props:(route)=>{
-      return {imgSrc:route.query.imgPath,name:route.query.productName,group:route.query.curGroup,price:route.query.curPrice}
-    }
+    props:(route)=>({imgSrc:route.query.imgPath,name:route.query.productName,group:route.query.curGroup,price:route.query.curPrice})
   },
 
   {
     path: '/settlement',
     component: Settlement
+  },
+  {
+    path: '/buy',
+    component: Buy
   }
 ]

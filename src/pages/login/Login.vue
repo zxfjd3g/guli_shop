@@ -26,13 +26,17 @@
             <div class="title">
               <span>其他登陆方式</span>
             </div>
-            <a href="javascript:;">
+            <a href="javascript:;" @click="ToLogin">
               <i class="qq"></i>
               <span>QQ</span>
             </a>
-            <a href="javascript:;">
+            <a href="javascript:;" @click="ToLogin">
               <i class="wx"></i>
               <span>微信</span>
+            </a>
+            <a href="javascript:;" @click="ToLogin">
+              <i class="xl"></i>
+              <span>新浪</span>
             </a>
           </div>
         </div>
@@ -244,6 +248,10 @@
                   background-position 0 0
                 &.wx
                   background-position -33px 0
+                &.xl
+                  background-image url('/static/image/login/xlwb.png');
+                  background-size:auto 100%
+
 
 
 

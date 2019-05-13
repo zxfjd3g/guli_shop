@@ -45,7 +45,9 @@
         </div>
         <div class="jiesuan fr">
           <div class="jiesuanjiage fl">合计（不含运费）：<span>{{totalPrice}}元</span></div>
-          <div class="jsanniu fr"><input class="jsan" type="submit" name="jiesuan" value="去结算"/></div>
+          <div class="jsanniu fr">
+            <input class="jsan" type="submit" name="jiesuan" value="去结算" @click="toBuy"/>
+            </div>
           <div class="clear"></div>
         </div>
         <div class="clear"></div>
@@ -133,6 +135,11 @@
       },
       cb(msg){
         alert(msg);
+      },
+      toBuy(){
+        this.$store.dispatch('getBuyOrderList',()=>{
+          this.$router.push('/buy');
+        })
       }
     },
     watch: {

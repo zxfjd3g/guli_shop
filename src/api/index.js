@@ -53,11 +53,15 @@ export const reqSearch = (data) => ajax(`${NEWBASE}/search`,data);
 
 //User
 //用户信息
-export const reqUserInfo = () => ajax(`${NEWBASE}/user/info`,{},'POST');
+export const reqUserInfo = (token) => ajax(`${LOGINBASE}/userinfo`,{token});
 //登陆
 export const reqLogin = (url) => ajax(`${LOGINBASE}/register/authorization?authType=weibo&url=${url}`);
 //注册
 export const reqRegister = ({phone,code}) => ajax(`${NEWBASE}/user/regist`,{phone,code},'POST');
+
+//Buy
+//购买订单
+export const reqBuyOrderList = (token) => ajax(`${NEWBASE}/order/orderconfirm`,{token},"POSTFORM");
 
 //Pay
 //支付

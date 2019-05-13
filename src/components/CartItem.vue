@@ -7,7 +7,7 @@
     <div class="sub_content fl ft20">{{good.productName}}</div>
     <div class="sub_content fl ">{{good.price}}元</div>
     <div class="sub_content fl">
-      <input class="shuliang" type="number" v-model="count"  @mouseout="updateGood" step="1" min="1">
+      <input class="shuliang" type="number" v-model="count"  @blur="updateGood" step="1" min="1">
     </div>
     <div class="sub_content fl">{{totalPrice}}元</div>
     <div class="sub_content fl"><a @click="remove">×</a></div>

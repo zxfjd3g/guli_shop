@@ -13,7 +13,7 @@ let router= new VueRouter({
 })
 
 router.beforeEach((to,from,next)=>{
-  if(to.fullPath.includes('personal')&&!store.state.userToken){
+  if((to.fullPath.includes('personal')||to.fullPath.includes('buy'))&&!store.state.userToken){
     next('login');
   }else{
     next()
